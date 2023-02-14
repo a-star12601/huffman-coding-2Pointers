@@ -1,6 +1,7 @@
 package com.capillary.app.decompression;
 
 import com.capillary.app.general.Node;
+import com.capillary.app.huffman.decompression.HuffmanDecoding;
 import org.junit.Test;
 import org.mockito.Mock;
 
@@ -53,7 +54,7 @@ public class HuffmanDecodingTest {
     @Test
     public void TestInitialiseTreeSingleNode(){
         HuffmanDecoding dec=new HuffmanDecoding();
-        Node tree=new Node(88,new Node('a',88),new Node('\0',0),0);
+        Node tree=new Node(new Node('a',88),new Node('\0',0),0);
         HashMap<Character,Integer > map=new HashMap<>();
         map.put('a',88);
         Node ActualTree=dec.initialiseTree(map);
@@ -61,7 +62,7 @@ public class HuffmanDecodingTest {
     }
     @Test
     public void TestInitialiseTreeMultiNode(){
-        Node tree=new Node(72,new Node('b',29),new Node(43,new Node('a',21),new Node('c',22),1),2);
+        Node tree=new Node(new Node('b',29),new Node(new Node('a',21),new Node('c',22),1),2);
         HuffmanDecoding dec=new HuffmanDecoding();
         HashMap<Character,Integer > map=new HashMap<>();
         map.put('a',21);

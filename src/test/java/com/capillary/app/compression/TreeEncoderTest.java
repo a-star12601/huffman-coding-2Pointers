@@ -1,5 +1,6 @@
 package com.capillary.app.compression;
 
+import com.capillary.app.huffman.compression.TreeEncoder;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
 
 public class TreeEncoderTest {
 

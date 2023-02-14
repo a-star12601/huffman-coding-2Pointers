@@ -1,9 +1,8 @@
 package com.capillary.app;
 
-import com.capillary.app.zipUnzip.HuffmanZipperUnzipper;
-import com.capillary.app.zipUnzip.PassableObject;
+import com.capillary.app.zipper.HuffmanZipperUnzipper;
+import com.capillary.app.zipper.PassableObject;
 
-import java.io.File;
 import java.util.Scanner;
 
 /**

@@ -1,20 +1,5 @@
 package com.capillary.app;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import com.capillary.app.compression.HuffmanEncoding;
-import com.capillary.app.decompression.HuffmanDecoding;
-
-import java.io.File;
-import java.io.IOException;
-
-import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doCallRealMethod;
-import static org.mockito.Mockito.doThrow;
-
 public class MainTest {
 //    private static Main m;
 //    @Mock

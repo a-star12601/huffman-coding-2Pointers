@@ -1,6 +1,7 @@
 package com.capillary.app.compression;
 
 import com.capillary.app.general.Node;
+import com.capillary.app.huffman.compression.HuffmanEncoding;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,10 +50,7 @@ public class HuffmanEncodingTest {
         HashMap<Character,Integer> map=new HashMap<>();
         map.put('a',88);
         Node ActualTree=enc.initialiseTree(map);
-        Node tree=new Node();
-        tree.Left=new Node('a',88);
-        tree.Freq=88;
-        tree.Right=new Node();
+        Node tree=new Node(new Node('a',88),new Node(),1);
         //System.out.println(enc.tree.Left);
         Assert.assertTrue(MatchTrees(ActualTree, tree));
     }
@@ -75,10 +73,7 @@ public class HuffmanEncodingTest {
         map.put('a',4);
         map.put('b',2);
         Node ActualTree=enc.initialiseTree(map);
-        Node tree=new Node();
-        tree.Left=new Node('b',2);
-        tree.Freq=6;
-        tree.Right=new Node('a',4);
+        Node tree=new Node(new Node('b',2),new Node('a',4),1);
         //System.out.println(enc.tree.Left);
         Assert.assertTrue(MatchTrees(ActualTree, tree));
     }
@@ -87,7 +82,7 @@ public class HuffmanEncodingTest {
     @Test
     public void testGenerateTreeMap() {
         enc=new HuffmanEncoding();
-        Node tree=new Node(72,new Node('b',29),new Node(43,new Node('a',21),new Node('c',22),1),2);
+        Node tree=new Node(new Node('b',29),new Node(new Node('a',21),new Node('c',22),1),2);
         HashMap<Character,String> ActualHash=enc.generateTreeMap(tree);
         HashMap<Character,String > hash=new HashMap<>();
         hash.put('b',"0");
@@ -106,7 +101,7 @@ public class HuffmanEncodingTest {
     public boolean MatchTrees(Node expected,Node actual){
         if(expected==null && actual==null)
         {return true;}
-        if(expected.Char==actual.Char)
+        if(expected.Char==actual.Char && expected.Freq==actual.Freq && expected.Height==actual.Height)
         return MatchTrees(expected.Left,actual.Left)&&MatchTrees(expected.Right,actual.Right);
         else return false;
     }
