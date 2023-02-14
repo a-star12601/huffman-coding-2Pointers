@@ -4,7 +4,7 @@ public class Node {
     /**
      * Character in the node.
      */
-    public int Char;
+    public String Char;
     /**
      * frequency of the node.
      */
@@ -26,7 +26,7 @@ public class Node {
      * Constructor for empty node.
      */
     public Node(){
-        Char='\0';
+        Char="\0";
         Freq=0;
         Left=null;
         Right=null;
@@ -39,8 +39,8 @@ public class Node {
      * @param c the character
      * @param f the frequency
      */
-    public Node(int c,int f){
-        Char=c;
+    public Node(String c,int f){
+        Char=c+"";
         Freq=f;
         Left=null;
         Right=null;

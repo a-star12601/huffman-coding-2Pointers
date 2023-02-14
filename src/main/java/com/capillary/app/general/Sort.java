@@ -12,6 +12,6 @@ public class Sort implements Comparator<Node> {
             return x.Freq-y.Freq;
         else if(x.Height-y.Height!=0)
             return x.Height-y.Height;
-        else return x.Char-y.Char;
+        else return (x.Char).compareTo(y.Char);
     }
 }

@@ -1,18 +1,0 @@
-
-k
-java:S1104"PMake Char a static final constant or non-public and provide accessors if needed.(œ¢…¡ùÿÿÿÿ
-k
-java:S1104"PMake Freq a static final constant or non-public and provide accessors if needed.(á®•ûÿÿÿÿ
-f
-java:S1104"PMake Left a static final constant or non-public and provide accessors if needed.(ÕÛÃ
-l
-java:S1104"QMake Right a static final constant or non-public and provide accessors if needed.(§‚ŞÀúÿÿÿÿ
-o
-java:S1104"RMake Height a static final constant or non-public and provide accessors if needed.(Ú†¿³8İş¯ä0
-i	java:S116"ORename this field "Char" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œ¢…¡ùÿÿÿÿ
-i	java:S116"ORename this field "Freq" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(á®•ûÿÿÿÿ
-d	java:S116"ORename this field "Left" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÕÛÃ
-j	java:S116"PRename this field "Right" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§‚ŞÀúÿÿÿÿ
-m	java:S116"QRename this field "Height" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ú†¿³8ãş¯ä0
-X	java:S125/"<This block of commented-out lines of code should be removed.(•™Ê³8ø¯ä0
-]	java:S125?"<This block of commented-out lines of code should be removed.(‡ÚÓ•ÿÿÿÿÿ8©Õö¯ä0

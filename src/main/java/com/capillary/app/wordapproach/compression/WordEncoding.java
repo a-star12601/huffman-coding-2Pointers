@@ -1,4 +1,4 @@
-package com.capillary.app.huffman.compression;
+package com.capillary.app.wordapproach.compression;
 
 import com.capillary.app.general.Node;
 import com.capillary.app.general.Sort;
@@ -10,19 +10,43 @@ import java.util.PriorityQueue;
 /**
  * Class for performing Huffman Encoding.
  */
-public class HuffmanEncoding implements IEncodeTree {
+public class WordEncoding implements IEncodeTree {
 
+    private static boolean isLetterOrDigit(char c) {
+        return (c >= 'a' && c <= 'z') ||
+                (c >= 'A' && c <= 'Z') ||
+                (c >= '0' && c <= '9');
+    }
     @Override
-    public HashMap<Character,Integer> initialiseMap(byte[] arr){
+    public HashMap<String,Integer> initialiseMap(byte[] arr){
         if(arr==null || arr.length==0){
             throw new RuntimeException("Input file is Empty");
         }
-        HashMap<Character,Integer> map=new HashMap<>();
+        HashMap<String,Integer> map=new HashMap<>();
+        String curWord="";
+        int count=0;
         for (byte b : arr) {
             char ch = (char) b;
-            int count = map.getOrDefault(ch, 0);
-            map.put(ch, count + 1);
+            if(isLetterOrDigit(ch)){
+                curWord+=ch;
+            }
+            else{
+                if(curWord!=""){
+                    count = map.getOrDefault(curWord, 0);
+                    map.put(curWord, count + 1);
+                    curWord="";
+                }
+                count = map.getOrDefault(ch+"", 0);
+                map.put(ch+"", count + 1);
+            }
+            }
+        if(curWord!=""){
+            count = map.getOrDefault(curWord, 0);
+            map.put(curWord, count + 1);
         }
+//        for(Map.Entry<?, Integer> entry:map.entrySet()){
+//            System.out.println(entry.getKey()+" | "+entry.getValue());
+//        }
         return map;
     }
     @Override
@@ -33,7 +57,7 @@ public class HuffmanEncoding implements IEncodeTree {
         Node tree;
         PriorityQueue<Node> q=new PriorityQueue<>(new Sort());
         for(Map.Entry<?, Integer> entry:map.entrySet()) {
-            Node temp=new Node(entry.getKey().toString(),entry.getValue());
+            Node temp=new Node( entry.getKey().toString(),entry.getValue());
             q.add(temp);
         }
         Node root=null;
@@ -51,12 +75,12 @@ public class HuffmanEncoding implements IEncodeTree {
         tree=root;
         return tree;
     }
-    public void setBitsHash(Node tree, String bits, HashMap<Character,String> freqMap) {
+    public void setBitsHash(Node tree, String bits, HashMap<String,String> freqMap) {
         if(tree ==null){
             //do nothing
         }
         else if(tree.Left==null && tree.Right==null) {
-            freqMap.put((char) tree.Char.charAt(0),bits);
+            freqMap.put( tree.Char,bits);
         }
         else {
             setBitsHash(tree.Left,bits+"0",freqMap);
@@ -65,11 +89,11 @@ public class HuffmanEncoding implements IEncodeTree {
     }
 
     @Override
-    public HashMap< Character,String> generateTreeMap(Node tree) {
-        HashMap<Character,String > hash=new HashMap<>();
+    public HashMap< String,String> generateTreeMap(Node tree) {
+        HashMap<String,String > hash=new HashMap<>();
         setBitsHash(tree,"",hash);
 
-//        for(Map.Entry<Character, String> e : hash.entrySet()) {
+//        for(Map.Entry<String, String> e : hash.entrySet()) {
 //            System.out.println(e.getKey()+" | "+e.getValue());
 //        }
         return hash;

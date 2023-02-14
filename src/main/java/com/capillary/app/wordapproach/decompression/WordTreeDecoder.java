@@ -1,4 +1,4 @@
-package com.capillary.app.huffman.decompression;
+package com.capillary.app.wordapproach.decompression;
 
 import com.capillary.app.general.Node;
 import com.capillary.app.interfaces.decompression.IDecoder;
@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Class for root.general Tree-Based Decoders.
  */
-public class TreeDecoder implements IDecoder {
+public class WordTreeDecoder implements IDecoder {
     /**
      * variable storing size of serialised map.
      */
@@ -19,7 +19,8 @@ public class TreeDecoder implements IDecoder {
     public int getCount(HashMap<?,Integer> map) {
         int count=0;
         for(Map.Entry<?, Integer> entry:map.entrySet()){
-            count+=entry.getValue();
+//            System.out.println(entry.getKey()+" | "+entry.getValue());
+            count+=entry.getKey().toString().length() * entry.getValue();
         }
         return count;
         //System.out.println(count);
@@ -52,7 +53,14 @@ public class TreeDecoder implements IDecoder {
                     root = root.Right;
                 }
             }
-            bytes[chars++]= (byte) root.Char.charAt(0);
+            byte[] currentWord=root.Char.getBytes();
+            if(currentWord.length==1){
+                bytes[chars++]= (byte) root.Char.charAt(0);
+            }
+            else
+            for(byte c:currentWord) {
+                bytes[chars++] = c;
+            }
             if(chars==count){break;}
             root= tree;
         }

@@ -1,4 +1,4 @@
-package com.capillary.app.huffman.decompression;
+package com.capillary.app.wordapproach.decompression;
 
 import com.capillary.app.general.Node;
 import com.capillary.app.general.Sort;
@@ -15,18 +15,19 @@ import java.util.PriorityQueue;
 /**
  * Class for performing Huffman decoding.
  */
-public class HuffmanDecoding implements IDecodeTree {
+public class WordDecoding implements IDecodeTree {
 
     int mapsize=0;
     public long getMapSize(){
+        System.out.println(mapsize);
         return mapsize;
     }
     @Override
-    public HashMap<Character,Integer> initialiseMap(byte[] arr) throws IOException, ClassNotFoundException {
+    public HashMap<String,Integer> initialiseMap(byte[] arr) throws IOException, ClassNotFoundException {
         if(arr==null || arr.length==0){
             throw new RuntimeException("Input file is Empty");
         }
-        HashMap<Character,Integer> map=new HashMap<>();
+        HashMap<String,Integer> map=new HashMap<>();
         int i=0;
         for(byte x:arr){
             if((char) x=='\n'){
@@ -41,20 +42,20 @@ public class HuffmanDecoding implements IDecodeTree {
         byte[] b1= Arrays.copyOfRange(arr,i+1,(int)mapsize);
         ByteArrayInputStream bStream=new ByteArrayInputStream(b1);
         ObjectInputStream serial=new ObjectInputStream(bStream);
-        map=(HashMap<Character, Integer>) serial.readObject();
+        map=(HashMap<String, Integer>) serial.readObject();
         serial.close();
         bStream.close();
         return map;
     }
     @Override
     public Node initialiseTree(HashMap<?, Integer> map) {
-        Node tree=new Node();
         if(map==null||map.size()==0){
             throw new RuntimeException("Map is empty!!");
         }
-        PriorityQueue<Node> q=new PriorityQueue<>(map.size(),new Sort());
+        Node tree;
+        PriorityQueue<Node> q=new PriorityQueue<>(new Sort());
         for(Map.Entry<?, Integer> entry:map.entrySet()) {
-            Node temp=new Node(entry.getKey().toString(),entry.getValue());
+            Node temp=new Node( entry.getKey().toString(),entry.getValue());
             q.add(temp);
         }
         Node root=null;
