@@ -45,6 +45,9 @@ public class WordDecoding implements IDecodeTree {
         map=(HashMap<String, Integer>) serial.readObject();
         serial.close();
         bStream.close();
+//        for(Map.Entry<String, Integer> e : map.entrySet()) {
+//            System.out.println(e.getKey()+" | "+e.getValue());
+//        }
         return map;
     }
     @Override

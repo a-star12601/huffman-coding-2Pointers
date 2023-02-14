@@ -59,6 +59,7 @@ public class HuffmanZipperUnzipper implements IZipperUnzipper{
             //        System.out.println("Reading Frequency Map...");
             byte[] compressBytes=f.readFile(object.compressed);
             byte[] exportBytes=decodeAbstract(object,compressBytes);
+            System.out.println(exportBytes[0]+" "+exportBytes.length);
             f.writeToFile("DEC"+object.original,false,exportBytes);
             Instant inst2 = Instant.now();
             System.out.println("Time Taken for Decompression: "+ Duration.between(inst1, inst2).toString());

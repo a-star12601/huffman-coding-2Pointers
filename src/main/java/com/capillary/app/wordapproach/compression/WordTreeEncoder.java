@@ -37,6 +37,7 @@ public class WordTreeEncoder implements IEncoder {
         List<Byte> bytes=new ArrayList<>();
         for (byte c : arr) {
             char ch = (char) c;
+//            System.out.println(ch);
             if(isLetterOrDigit(ch)){
                 curWord+=ch;
             }

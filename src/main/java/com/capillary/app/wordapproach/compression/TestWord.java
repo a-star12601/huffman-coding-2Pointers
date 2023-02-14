@@ -18,7 +18,7 @@ public class TestWord {
         Instant inst1 = Instant.now();
         WordEncoding enc=new WordEncoding();
         FileOperations f=new FileOperations();
-        byte[] arr=f.readFile("WordTest.txt");
+        byte[] arr=f.readFile("pg100.txt");
         HashMap<String ,Integer> map=enc.initialiseMap(arr);
         System.out.println(map.size());
         Node tree=enc.initialiseTree(map);
@@ -36,7 +36,7 @@ public class TestWord {
         f.writeToFile(compressed,true,encodedBytes);
         Instant inst2 = Instant.now();
         System.out.println("Time Taken for Compression: "+ Duration.between(inst1, inst2).toString());
-        f.compressionStats("WordTest.txt", compressed);
+        f.compressionStats("pg100.txt", compressed);
 
 
         WordDecoding dec=new WordDecoding();
@@ -48,12 +48,12 @@ public class TestWord {
 //            System.out.println("Creating Huffman Tree...");
         Node Ctree=dec.initialiseTree(Cmap);
         //        System.out.println("Decompressing...");
-        byte[] exportBytes=decoder.decodingLogic(compressBytes,tree,dec.getMapSize(),decoder.getCount(map));
+        byte[] exportBytes=decoder.decodingLogic(compressBytes,tree,dec.getMapSize(),decoder.getCount(Cmap));
         f.writeToFile("DEC.txt",false,exportBytes);
         Instant inst4 = Instant.now();
         System.out.println("Time Taken for Decompression: "+ Duration.between(inst3, inst4).toString());
         System.out.println("Comparing Files...");
-        if(f.compareFiles("WordTest.txt","DEC.txt")){
+        if(f.compareFiles("pg100.txt","DEC.txt")){
             System.out.println("Files Matched");
         }
         else {

@@ -22,8 +22,8 @@ public class WordTreeDecoder implements IDecoder {
 //            System.out.println(entry.getKey()+" | "+entry.getValue());
             count+=entry.getKey().toString().length() * entry.getValue();
         }
+//        System.out.println(count);
         return count;
-        //System.out.println(count);
     }
 
     public byte[] decodingLogic(byte[] arr,Node tree,long mapsize,long count){
@@ -53,15 +53,20 @@ public class WordTreeDecoder implements IDecoder {
                     root = root.Right;
                 }
             }
+//            System.out.println(root.Char);
             byte[] currentWord=root.Char.getBytes();
-            if(currentWord.length==1){
+//            System.out.println(currentWord[0]);
+            if(currentWord[0]<0){
+//                System.out.println("Expected");
                 bytes[chars++]= (byte) root.Char.charAt(0);
             }
             else
-            for(byte c:currentWord) {
-                bytes[chars++] = c;
-            }
-            if(chars==count){break;}
+                for(byte c:currentWord) {
+                    bytes[chars++] = c;
+                }
+            if(chars==count){
+//                System.out.println(chars);
+                break;}
             root= tree;
         }
         return bytes;
