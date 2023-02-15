@@ -1,7 +1,7 @@
 package com.capillary.app.compression;
 
 import com.capillary.app.general.Node;
-import com.capillary.app.huffman.compression.HuffmanEncoding;
+import com.capillary.app.nativehuffman.compression.NativeHuffmanCompressionTree;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +12,7 @@ import java.util.HashMap;
 import static org.junit.Assert.assertThrows;
 
 public class HuffmanEncodingTest {
-    private static HuffmanEncoding enc;
+    private static NativeHuffmanCompressionTree enc;
 
 
     @Before
@@ -23,9 +23,9 @@ public class HuffmanEncodingTest {
 
     @Test
     public void testInitialiseMap() throws IOException, ClassNotFoundException {
-        enc=new HuffmanEncoding();
+        enc=new NativeHuffmanCompressionTree();
         byte arr[]=new byte[]{97,97,97,97,97,97,97,97,97,97,97,97,97,97};
-        HashMap<Character,Integer> ActualMap=enc.initialiseMap(arr);
+        HashMap<Character,Integer> ActualMap=enc.getFrequencyMap(arr);
         HashMap<Character,Integer> map=new HashMap<>();
         map.put('a',14);
         Assert.assertEquals("Map Doesn't Match",ActualMap, map);
@@ -33,46 +33,46 @@ public class HuffmanEncodingTest {
     @Test
     public void TestMapNullFile(){
         byte[] arr=null;
-        enc=new HuffmanEncoding();
-        assertThrows(RuntimeException.class,()->{HashMap<Character,Integer> ActualMap=enc.initialiseMap(arr);});
+        enc=new NativeHuffmanCompressionTree();
+        assertThrows(RuntimeException.class,()->{HashMap<Character,Integer> ActualMap=enc.getFrequencyMap(arr);});
     }
     @Test
     public void TestMapEmptyFile(){
         byte[] arr=new byte[0];
-        enc=new HuffmanEncoding();
-        assertThrows(RuntimeException.class,()->{HashMap<Character,Integer> ActualMap=enc.initialiseMap(arr);});
+        enc=new NativeHuffmanCompressionTree();
+        assertThrows(RuntimeException.class,()->{HashMap<Character,Integer> ActualMap=enc.getFrequencyMap(arr);});
     }
 
 
     @Test
     public void testInitialiseTreeForSingleNode() {
-        enc=new HuffmanEncoding();
+        enc=new NativeHuffmanCompressionTree();
         HashMap<Character,Integer> map=new HashMap<>();
         map.put('a',88);
-        Node ActualTree=enc.initialiseTree(map);
+        Node ActualTree=enc.generateTree(map);
         Node tree=new Node(new Node('a',88),new Node(),1);
         //System.out.println(enc.tree.Left);
         Assert.assertTrue(MatchTrees(ActualTree, tree));
     }
     @Test
     public void TestInitialiseTreeNullNode(){
-        enc=new HuffmanEncoding();
+        enc=new NativeHuffmanCompressionTree();
         Node tree=new Node();
-        assertThrows(RuntimeException.class,()->enc.initialiseTree(null));
+        assertThrows(RuntimeException.class,()->enc.generateTree(null));
     }
     @Test
     public void TestInitialiseTreeEmptyMap(){
-        enc=new HuffmanEncoding();
+        enc=new NativeHuffmanCompressionTree();
         Node tree=new Node();
-        assertThrows(RuntimeException.class,()->enc.initialiseTree(new HashMap<Character,Integer>()));
+        assertThrows(RuntimeException.class,()->enc.generateTree(new HashMap<Character,Integer>()));
     }
     @Test
     public void testInitialiseTreeForMultipleNodes() {
-        enc=new HuffmanEncoding();
+        enc=new NativeHuffmanCompressionTree();
         HashMap<Character,Integer> map=new HashMap<>();
         map.put('a',4);
         map.put('b',2);
-        Node ActualTree=enc.initialiseTree(map);
+        Node ActualTree=enc.generateTree(map);
         Node tree=new Node(new Node('b',2),new Node('a',4),1);
         //System.out.println(enc.tree.Left);
         Assert.assertTrue(MatchTrees(ActualTree, tree));
@@ -81,9 +81,9 @@ public class HuffmanEncodingTest {
 
     @Test
     public void testGenerateTreeMap() {
-        enc=new HuffmanEncoding();
+        enc=new NativeHuffmanCompressionTree();
         Node tree=new Node(new Node('b',29),new Node(new Node('a',21),new Node('c',22),1),2);
-        HashMap<Character,String> ActualHash=enc.generateTreeMap(tree);
+        HashMap<Character,String> ActualHash=enc.getHashTable(tree);
         HashMap<Character,String > hash=new HashMap<>();
         hash.put('b',"0");
         hash.put('a',"10");

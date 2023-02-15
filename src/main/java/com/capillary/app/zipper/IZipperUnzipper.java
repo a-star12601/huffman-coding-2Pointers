@@ -1,7 +1,11 @@
 package com.capillary.app.zipper;
 
 public interface IZipperUnzipper {
-    public void encode(PassableObject object);
+    public void compress(String originalFile, String compressedFile);
 
-    public void decode(PassableObject object) ;
+    public void decompress(String compressedFile) ;
+
+    public boolean CheckFileNotEmpty(String filename);
+
+    public boolean CheckFileExists(String filename);
 }

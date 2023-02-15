@@ -29,42 +29,6 @@ public class FileOperations {
         return arr;
     }
 
-    /**
-     * Compare two files and checks whether they match or not.
-     *
-     * @param file1 Name of 1st file
-     * @param file2 Name of 2nd file
-     * @return the boolean
-     */
-    public boolean compareFiles(String file1, String file2){
-        try {
-            byte[] arr1 = readFile(file1);
-            byte[] arr2= readFile(file2);
-            if(Arrays.equals(arr1,arr2)){
-                return true;
-            }
-            else{
-                return false;
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Print out the Compression stats.
-     *
-     * @param original   the original filename
-     * @param compressed the compressed filename
-     */
-    public void compressionStats(String original, String compressed){
-        File f1=new File(original);
-        File f2=new File(compressed);
-        System.out.println("Original File Size: "+ f1.length()+"bytes");
-        System.out.println("Compressed File Size: "+ f2.length()+"bytes");
-        float percentage=(float)(f1.length()- f2.length())*100/f1.length();
-        System.out.println("Compression Ratio: "+ percentage+"%");
-    }
 
     /**
      *  Convert ByteList into byte array.
