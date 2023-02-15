@@ -31,7 +31,7 @@ public class ScaledHuffmanDecompression implements IDecompression {
         for (int i = 0; i < 8; i++)
             bits[7 - i] = ((b & (1 << i)) != 0);
         while(curbyte<arr.length){
-            while(root.Left!=null && root.Right!=null){
+            while(root.leftNode !=null && root.rightNode !=null){
                 if(bitcounter==8){
                     b=arr[++curbyte];
                     for (int i = 0; i < 8; i++)
@@ -40,16 +40,16 @@ public class ScaledHuffmanDecompression implements IDecompression {
                 }
                 else if(!bits[bitcounter]) {
                     bitcounter++;
-                    root = root.Left;
+                    root = root.leftNode;
                 }
                 else{
                     bitcounter++;
-                    root = root.Right;
+                    root = root.rightNode;
                 }
             }
-            byte[] currentWord=root.Char.getBytes();
+            byte[] currentWord=root.value.getBytes();
             if(currentWord[0]<0){
-                bytes[chars++]= (byte) root.Char.charAt(0);
+                bytes[chars++]= (byte) root.value.charAt(0);
             }
             else
                 for(byte c:currentWord) {

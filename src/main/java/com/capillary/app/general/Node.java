@@ -4,33 +4,27 @@ public class Node {
     /**
      * Character in the node.
      */
-    public String Char;
+    public String value;
     /**
      * frequency of the node.
      */
-    public int Freq;
+    public int freq;
     /**
      * left link.
      */
-    public Node Left;
+    public Node leftNode;
     /**
      * right link.
      */
-    public Node Right;
-    /**
-     * Current height of node.
-     */
-    public int Height;
-
+    public Node rightNode;
     /**
      * Constructor for empty node.
      */
     public Node(){
-        Char="\0";
-        Freq=0;
-        Left=null;
-        Right=null;
-        Height=0;
+        value ="\0";
+        freq =0;
+        leftNode =null;
+        rightNode =null;
     }
 
     /**
@@ -40,11 +34,10 @@ public class Node {
      * @param f the frequency
      */
     public Node(String c,int f){
-        Char=c+"";
-        Freq=f;
-        Left=null;
-        Right=null;
-//        Height=0;
+        value =c;
+        freq =f;
+        leftNode =null;
+        rightNode =null;
     }
 
     /**
@@ -55,11 +48,10 @@ public class Node {
      * @param right the right link
      * @param h     the height
      */
-    public Node(Node left,Node right,int h){
-        Freq= left.Freq+ right.Freq;
-        Char= left.Char+ right.Char;
-        Left=left;
-        Right=right;
-//        Height=h;
+    public Node(Node left,Node right){
+        freq = left.freq + right.freq;
+        value = left.value + right.value;
+        this.leftNode =left;
+        rightNode =right;
     }
 }

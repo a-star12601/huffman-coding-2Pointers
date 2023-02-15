@@ -61,12 +61,12 @@ public class NativeHuffmanDecompressionTree implements IDecompressionTree {
         Node root=null;
         if(q.size()==1){
             Node single=q.poll();
-            root=new Node(single,new Node(),1);
+            root=new Node(single,new Node());
         }
         while(q.size()>1) {
             Node left=q.poll();
             Node right=q.poll();
-            Node sum=new Node(left,right,Math.max(left.Height,right.Height)+1);
+            Node sum=new Node(left,right);
             root=sum;
             q.add(sum);
         }

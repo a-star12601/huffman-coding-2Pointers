@@ -8,10 +8,8 @@ import java.util.Comparator;
 public class Sort implements Comparator<Node> {
     @Override
     public int compare(Node x, Node y){
-        if(x.Freq-y.Freq!=0)
-            return x.Freq-y.Freq;
-        else if(x.Height-y.Height!=0)
-            return x.Height-y.Height;
-        else return (x.Char).compareTo(y.Char);
+        if(x.freq != y.freq)
+            return x.freq - y.freq;
+        return (x.value).compareTo(y.value);
     }
 }

@@ -80,18 +80,18 @@ public class HuffmanDecodingTest {
 
     public void preorder(Node tree){
         if(tree!=null){
-            System.out.println(tree.Char);
-            preorder(tree.Left);
-            preorder(tree.Right);
+            System.out.println(tree.value);
+            preorder(tree.leftNode);
+            preorder(tree.rightNode);
         }
     }
 
     public boolean MatchTrees(Node expected, Node actual){
         if(expected==null && actual==null)
         {return true;}
-        if(expected.Char==actual.Char && expected.Freq==actual.Freq && expected.Height==actual.Height)
+        if(expected.value ==actual.value && expected.freq ==actual.freq && expected.Height==actual.Height)
 //        if(expected.Char==actual.Char)
-            return MatchTrees(expected.Left,actual.Left)&&MatchTrees(expected.Right,actual.Right);
+            return MatchTrees(expected.leftNode,actual.leftNode)&&MatchTrees(expected.rightNode,actual.rightNode);
         else return false;
     }
 }

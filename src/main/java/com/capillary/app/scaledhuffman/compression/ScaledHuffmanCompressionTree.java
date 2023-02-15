@@ -60,12 +60,12 @@ public class ScaledHuffmanCompressionTree implements ICompressionTree {
         Node root=null;
         if(q.size()==1){
             Node single=q.poll();
-            root=new Node(single,new Node(),1);
+            root=new Node(single,new Node());
         }
         while(q.size()>1) {
             Node left=q.poll();
             Node right=q.poll();
-            Node sum=new Node(left,right,Math.max(left.Height,right.Height)+1);
+            Node sum=new Node(left,right);
             root=sum;
             q.add(sum);
         }
@@ -74,12 +74,12 @@ public class ScaledHuffmanCompressionTree implements ICompressionTree {
     }
     public void setBitsHash(Node tree, String bits, HashMap<String,String> freqMap) {
         if(tree !=null){
-            if(tree.Left==null && tree.Right==null) {
-                freqMap.put( tree.Char,bits);
+            if(tree.leftNode ==null && tree.rightNode ==null) {
+                freqMap.put( tree.value,bits);
             }
             else {
-                setBitsHash(tree.Left,bits+"0",freqMap);
-                setBitsHash(tree.Right,bits+"1",freqMap);
+                setBitsHash(tree.leftNode,bits+"0",freqMap);
+                setBitsHash(tree.rightNode,bits+"1",freqMap);
             }
         }
     }

@@ -15,7 +15,7 @@ public class NativeHuffmanCompressionTree implements ICompressionTree {
     @Override
     public HashMap<Character,Integer> getFrequencyMap(byte[] arr){
         if(arr==null || arr.length==0){
-            throw new RuntimeException("Input file is Empty");
+            throw new RuntimeException("Input byte array is Empty!!");
         }
         HashMap<Character,Integer> map=new HashMap<>();
         for (byte b : arr) {
@@ -25,6 +25,7 @@ public class NativeHuffmanCompressionTree implements ICompressionTree {
         }
         return map;
     }
+
     @Override
     public Node generateTree(HashMap<?, Integer> map) {
         if(map==null||map.size()==0){
@@ -39,12 +40,12 @@ public class NativeHuffmanCompressionTree implements ICompressionTree {
         Node root=null;
         if(q.size()==1){
             Node single=q.poll();
-            root=new Node(single,new Node(),1);
+            root=new Node(single,new Node());
         }
         while(q.size()>1) {
             Node left=q.poll();
             Node right=q.poll();
-            Node sum=new Node(left,right,Math.max(left.Height,right.Height)+1);
+            Node sum=new Node(left,right);
             root=sum;
             q.add(sum);
         }
@@ -52,15 +53,14 @@ public class NativeHuffmanCompressionTree implements ICompressionTree {
         return tree;
     }
     public void setBitsHash(Node tree, String bits, HashMap<Character,String> freqMap) {
-        if(tree ==null){
-            //do nothing
-        }
-        else if(tree.Left==null && tree.Right==null) {
-            freqMap.put((char) tree.Char.charAt(0),bits);
-        }
-        else {
-            setBitsHash(tree.Left,bits+"0",freqMap);
-            setBitsHash(tree.Right,bits+"1",freqMap);
+        if(tree !=null){
+            if(tree.leftNode ==null && tree.rightNode ==null) {
+                freqMap.put((char) tree.value.charAt(0),bits);
+            }
+            else {
+                setBitsHash(tree.leftNode,bits+"0",freqMap);
+                setBitsHash(tree.rightNode,bits+"1",freqMap);
+            }
         }
     }
 
