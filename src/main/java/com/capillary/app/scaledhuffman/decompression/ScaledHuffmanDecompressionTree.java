@@ -1,14 +1,13 @@
 package com.capillary.app.scaledhuffman.decompression;
 
 import com.capillary.app.general.Node;
-import com.capillary.app.general.Sort;
+import com.capillary.app.general.NodeComparator;
 import com.capillary.app.interfaces.decompression.IDecompressionTree;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 
@@ -21,12 +20,13 @@ public class ScaledHuffmanDecompressionTree implements IDecompressionTree {
     public long getMapSize(){
         return mapsize;
     }
+
     @Override
-    public HashMap<String,Integer> getFrequencyMap(byte[] arr) throws IOException, ClassNotFoundException {
+    public Map<String,Integer> getFrequencyMap(byte[] arr) throws IOException, ClassNotFoundException {
         if(arr==null || arr.length==0){
             throw new RuntimeException("Input file is Empty");
         }
-        HashMap<String,Integer> map=new HashMap<>();
+        Map<String,Integer> map;
         int i=0;
         for(byte x:arr){
             if((char) x=='\n'){
@@ -37,25 +37,24 @@ public class ScaledHuffmanDecompressionTree implements IDecompressionTree {
             i++;
         }
         mapsize=mapsize+i+1;
-        //System.out.println(mapsize);
-        byte[] b1= Arrays.copyOfRange(arr,i+1,(int)mapsize);
+        byte[] b1= Arrays.copyOfRange(arr,i+1,mapsize);
+
         ByteArrayInputStream bStream=new ByteArrayInputStream(b1);
         ObjectInputStream serial=new ObjectInputStream(bStream);
-        map=(HashMap<String, Integer>) serial.readObject();
+
+        map=(Map<String, Integer>) serial.readObject();
         serial.close();
         bStream.close();
-//        for(Map.Entry<String, Integer> e : map.entrySet()) {
-//            System.out.println(e.getKey()+" | "+e.getValue());
-//        }
+
         return map;
     }
     @Override
-    public Node regenerateTree(HashMap<?, Integer> map) {
-        if(map==null||map.size()==0){
+    public Node regenerateTree(Map<?, Integer> map) {
+        if(map==null || map.size()==0){
             throw new RuntimeException("Map is empty!!");
         }
-        Node tree;
-        PriorityQueue<Node> q=new PriorityQueue<>(new Sort());
+
+        PriorityQueue<Node> q=new PriorityQueue<>(new NodeComparator());
         for(Map.Entry<?, Integer> entry:map.entrySet()) {
             Node temp=new Node( entry.getKey().toString(),entry.getValue());
             q.add(temp);
@@ -72,8 +71,7 @@ public class ScaledHuffmanDecompressionTree implements IDecompressionTree {
             root=sum;
             q.add(sum);
         }
-        tree=root;
-        return tree;
+        return root;
     }
 
 }

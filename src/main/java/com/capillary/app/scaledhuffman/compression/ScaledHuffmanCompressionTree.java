@@ -1,7 +1,7 @@
 package com.capillary.app.scaledhuffman.compression;
 
 import com.capillary.app.general.Node;
-import com.capillary.app.general.Sort;
+import com.capillary.app.general.NodeComparator;
 import com.capillary.app.interfaces.compression.ICompressionTree;
 
 import java.util.HashMap;
@@ -17,14 +17,16 @@ public class ScaledHuffmanCompressionTree implements ICompressionTree {
                 (c >= 'A' && c <= 'Z') ||
                 (c >= '0' && c <= '9');
     }
+
     @Override
-    public HashMap<String,Integer> getFrequencyMap(byte[] arr){
+    public Map<String,Integer> getFrequencyMap(byte[] arr){
         if(arr==null || arr.length==0){
             throw new RuntimeException("Input file is Empty");
         }
-        HashMap<String,Integer> map=new HashMap<>();
+
+        Map<String,Integer> map=new HashMap<>();
         String curWord="";
-        int count=0;
+
         for (byte b : arr) {
             char ch = (char) b;
             if(isLetterOrDigit(ch)){
@@ -32,31 +34,30 @@ public class ScaledHuffmanCompressionTree implements ICompressionTree {
             }
             else{
                 if(curWord!=""){
-                    count = map.getOrDefault(curWord, 0);
-                    map.put(curWord, count + 1);
+                    map.put(curWord, map.getOrDefault(curWord, 0) + 1);
                     curWord="";
                 }
-                count = map.getOrDefault(ch+"", 0);
-                map.put(ch+"", count + 1);
+                map.put(ch+"", map.getOrDefault(ch+"", 0) + 1);
             }
             }
         if(curWord!=""){
-            count = map.getOrDefault(curWord, 0);
-            map.put(curWord, count + 1);
+            map.put(curWord, map.getOrDefault(curWord, 0) + 1);
         }
         return map;
     }
+
     @Override
-    public Node generateTree(HashMap<?, Integer> map) {
-        if(map==null||map.size()==0){
+    public Node generateTree(Map<?, Integer> map) {
+        if(map==null || map.size()==0){
             throw new RuntimeException("Map is empty!!");
         }
-        Node tree;
-        PriorityQueue<Node> q=new PriorityQueue<>(new Sort());
+
+        PriorityQueue<Node> q=new PriorityQueue<>(new NodeComparator());
         for(Map.Entry<?, Integer> entry:map.entrySet()) {
             Node temp=new Node( entry.getKey().toString(),entry.getValue());
             q.add(temp);
         }
+
         Node root=null;
         if(q.size()==1){
             Node single=q.poll();
@@ -69,10 +70,9 @@ public class ScaledHuffmanCompressionTree implements ICompressionTree {
             root=sum;
             q.add(sum);
         }
-        tree=root;
-        return tree;
+        return root;
     }
-    public void setBitsHash(Node tree, String bits, HashMap<String,String> freqMap) {
+    public void setBitsHash(Node tree, String bits, Map<String,String> freqMap) {
         if(tree !=null){
             if(tree.leftNode ==null && tree.rightNode ==null) {
                 freqMap.put( tree.value,bits);
@@ -85,8 +85,8 @@ public class ScaledHuffmanCompressionTree implements ICompressionTree {
     }
 
     @Override
-    public HashMap< String,String> getHashTable(Node tree) {
-        HashMap<String,String > hash=new HashMap<>();
+    public Map< String,String> getHashTable(Node tree) {
+        Map<String,String > hash=new HashMap<>();
         setBitsHash(tree,"",hash);
 
         return hash;

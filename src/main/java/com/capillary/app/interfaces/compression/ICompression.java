@@ -2,8 +2,8 @@ package com.capillary.app.interfaces.compression;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The interface for a root.general Encoder.
@@ -17,7 +17,7 @@ public interface ICompression {
      * @return the list
      * @throws FileNotFoundException the file not found exception
      */
-    List<Byte> getCompressedBytes(byte[] arr, HashMap<?,String> hash);
+    List<Byte> getCompressedBytes(byte[] arr, Map<?,String> hash);
 
     /**
      * Serialise and store map into compressed file.
@@ -26,7 +26,7 @@ public interface ICompression {
      * @return the byte [ ]
      * @throws IOException the io exception
      */
-    byte[] getHeader(HashMap<?,Integer> map) throws IOException;
+    byte[] getHeader(Map<?,Integer> map) throws IOException;
 
-    byte[] getSerializedMap(HashMap<?,Integer> map) throws IOException;
+    byte[] getSerializedMap(Map<?,Integer> map) throws IOException;
 }

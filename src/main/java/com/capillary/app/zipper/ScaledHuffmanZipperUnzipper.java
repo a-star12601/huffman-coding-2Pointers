@@ -39,9 +39,9 @@ public class ScaledHuffmanZipperUnzipper implements IZipperUnzipper{
             byte[] inputBytes = f.readFile(originalFile);
 
             ICompressionTree cTree = new ScaledHuffmanCompressionTree();
-            HashMap<String,Integer> map= (HashMap<String, Integer>) cTree.getFrequencyMap(inputBytes);
+            Map<String,Integer> map= (HashMap<String, Integer>) cTree.getFrequencyMap(inputBytes);
             Node tree=cTree.generateTree(map);
-            HashMap<String,String> hash= (HashMap<String, String>) cTree.getHashTable(tree);
+            Map<String,String> hash= (HashMap<String, String>) cTree.getHashTable(tree);
 
             double average=WAvg(map,hash);
             System.out.println("Average LPC : "+average);
@@ -64,7 +64,7 @@ public class ScaledHuffmanZipperUnzipper implements IZipperUnzipper{
             byte[] compressBytes = f.readFile(compressedFile);
 
             IDecompressionTree dTree = new ScaledHuffmanDecompressionTree();
-            HashMap<String,Integer> map= (HashMap<String, Integer>) dTree.getFrequencyMap(compressBytes);
+            Map<String,Integer> map= (HashMap<String, Integer>) dTree.getFrequencyMap(compressBytes);
             Node tree=dTree.regenerateTree(map);
 
             IDecompression decomp = new ScaledHuffmanDecompression();
@@ -76,7 +76,7 @@ public class ScaledHuffmanZipperUnzipper implements IZipperUnzipper{
         }
     }
 
-    double WAvg(HashMap<?,Integer> map,HashMap<?,String> hash){
+    double WAvg(Map<?,Integer> map,Map<?,String> hash){
         double sum=0;
         double chars=0;
         for(Map.Entry<?,Integer> m: map.entrySet()){

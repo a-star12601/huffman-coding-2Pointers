@@ -1,6 +1,6 @@
 package com.capillary.app;
 
-import com.capillary.app.general.Stats;
+import com.capillary.app.general.CompressionStats;
 import com.capillary.app.zipper.NativeHuffmanZipperUnzipper;
 import com.capillary.app.zipper.IZipperUnzipper;
 import com.capillary.app.zipper.ScaledHuffmanZipperUnzipper;
@@ -56,7 +56,7 @@ public class Main{
             end = System.currentTimeMillis();
             long decompressionTime = end - start;
 
-            Stats st=new Stats();
+            CompressionStats st=new CompressionStats();
             st.getStats(filename,compressed,"DEC"+compressed,compressionTime,decompressionTime);
         } else if (!fileZipper.CheckFileExists(filename)) {
             System.out.println("File Doesn't Exist!!");

@@ -3,13 +3,13 @@ package com.capillary.app.interfaces.decompression;
 import com.capillary.app.general.Node;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Map;
 
 public interface IDecompressionTree {
 
-    HashMap<?,Integer> getFrequencyMap(byte[] arr) throws IOException, ClassNotFoundException ;
+    Map<?,Integer> getFrequencyMap(byte[] arr) throws IOException, ClassNotFoundException ;
 
-    Node regenerateTree(HashMap<?,Integer> map);
+    Node regenerateTree(Map<?,Integer> map);
 
     long getMapSize();
 }

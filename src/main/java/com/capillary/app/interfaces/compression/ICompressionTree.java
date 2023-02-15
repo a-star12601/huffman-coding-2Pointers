@@ -2,13 +2,13 @@ package com.capillary.app.interfaces.compression;
 
 import com.capillary.app.general.Node;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public interface ICompressionTree {
 
-    HashMap<?,Integer> getFrequencyMap(byte[] arr) ;
+    Map<?,Integer> getFrequencyMap(byte[] arr) ;
 
-    Node generateTree(HashMap<?,Integer> map);
+    Node generateTree(Map<?,Integer> map);
 
-    HashMap<?,String> getHashTable(Node tree);
+    Map<?,String> getHashTable(Node tree);
 }
