@@ -7,9 +7,6 @@ import java.util.Map;
 
 public interface IDecompressionTree<T> {
 
-    Map<T,Integer> getFrequencyMap(byte[] arr) throws IOException, ClassNotFoundException ;
-
     Node regenerateTree(Map<T,Integer> map);
 
-    long getMapSize();
 }

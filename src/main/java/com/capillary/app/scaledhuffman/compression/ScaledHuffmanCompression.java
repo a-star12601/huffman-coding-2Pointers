@@ -3,6 +3,7 @@ package com.capillary.app.scaledhuffman.compression;
 import com.capillary.app.zipper.compression.ICompression;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -14,27 +15,21 @@ import java.util.List;
  */
 public class ScaledHuffmanCompression implements ICompression<String> {
     @Override
-    public byte[] getHeader(Map<String,Integer> map) throws IOException {
-        ByteArrayOutputStream bStream = new ByteArrayOutputStream();
-        ObjectOutputStream serial = new ObjectOutputStream(bStream);
+    public void writeObjects(Map<String,Integer> map,byte arr[],String compressedFile) throws IOException {
+        if(map == null || map.isEmpty()){
+            throw new RuntimeException("Map is Null/Empty!!");
+        }
 
-        serial.writeObject(map);
-        serial.close();
+        FileOutputStream fout = new FileOutputStream(compressedFile);
+        ObjectOutputStream out =new ObjectOutputStream(fout);
 
-        byte[] mapContent = bStream.toByteArray();
-        byte[] mapSize=(mapContent.length+"\n").getBytes();
-        bStream.close();
+        out.writeObject(map);
+        out.writeObject(arr);
 
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
-        outputStream.write( mapSize );
-        outputStream.write( mapContent );
+        out.close();
+        fout.close();
 
-        byte exportBytes[] = outputStream.toByteArray( );
-        outputStream.close();
-
-        return exportBytes;
     }
-
     private static boolean isLetterOrDigit(char c) {
         return (c >= 'a' && c <= 'z') ||
                 (c >= 'A' && c <= 'Z') ||

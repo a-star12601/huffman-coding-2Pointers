@@ -47,7 +47,7 @@ public class NativeHuffmanCompressionTest {
         byte expected[] = outputStream.toByteArray( );
         outputStream.close();
 
-        byte[] result= cObj.getHeader(mp);
+        byte[] result= cObj.writeObjects(mp);
         assertArrayEquals(expected,result);
     }
 
@@ -55,14 +55,14 @@ public class NativeHuffmanCompressionTest {
     public void getHeader_MapIsNull() throws IOException {
         Map<Character, Integer> mp = null;
 
-        assertThrows(RuntimeException.class, () -> cObj.getHeader(mp));
+        assertThrows(RuntimeException.class, () -> cObj.writeObjects(mp));
     }
 
     @Test
     public void getHeader_MapIsEmpty() throws IOException {
         Map<Character, Integer> mp = new HashMap<>();
 
-        assertThrows(RuntimeException.class, () -> cObj.getHeader(mp));
+        assertThrows(RuntimeException.class, () -> cObj.writeObjects(mp));
     }
 
     @Test

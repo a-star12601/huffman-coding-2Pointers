@@ -19,9 +19,9 @@ public class ScaledHuffmanDecompression implements IDecompression<String> {
         return count;
     }
 
-    public byte[] getDecompressedBytes(byte[] arr, Node tree, long mapsize, long count){
+    public byte[] getDecompressedBytes(byte[] arr, Node tree,long count){
         byte[] bytes=new byte[(int) count];
-        int curbyte=(int)mapsize - 1;
+        int curbyte= -1;
         Node root= tree;
         byte b;
         int chars=0;

@@ -3,6 +3,7 @@ package com.capillary.app.nativehuffman.compression;
 import com.capillary.app.zipper.compression.ICompression;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -15,29 +16,20 @@ import java.util.Map;
 public class NativeHuffmanCompression implements ICompression<Character> {
 
     @Override
-    public byte[] getHeader(Map<Character,Integer> map) throws IOException {
+    public void writeObjects(Map<Character,Integer> map,byte arr[],String compressedFile) throws IOException {
         if(map == null || map.isEmpty()){
             throw new RuntimeException("Map is Null/Empty!!");
         }
 
-        ByteArrayOutputStream bStream = new ByteArrayOutputStream();
-        ObjectOutputStream serial = new ObjectOutputStream(bStream);
+        FileOutputStream fout = new FileOutputStream(compressedFile);
+        ObjectOutputStream out =new ObjectOutputStream(fout);
 
-        serial.writeObject(map);
-        serial.close();
+        out.writeObject(map);
+        out.writeObject(arr);
 
-        byte[] mapContent = bStream.toByteArray();
-        byte[] mapSize=(mapContent.length+"\n").getBytes();
-        bStream.close();
+        out.close();
+        fout.close();
 
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
-        outputStream.write( mapSize );
-        outputStream.write( mapContent );
-
-        byte exportBytes[] = outputStream.toByteArray( );
-        outputStream.close();
-
-        return exportBytes;
     }
 
     @Override

@@ -26,6 +26,6 @@ public interface ICompression<T> {
      * @return the byte [ ]
      * @throws IOException the io exception
      */
-    byte[] getHeader(Map<T,Integer> map) throws IOException;
+    void writeObjects(Map<T,Integer> map,byte[] arr,String compressedFile) throws IOException;
 
 }

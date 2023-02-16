@@ -16,40 +16,6 @@ import java.util.PriorityQueue;
  */
 public class NativeHuffmanDecompressionTree implements IDecompressionTree<Character> {
 
-    int mapsize=0;
-
-    public long getMapSize() {
-        return mapsize;
-    }
-
-    @Override
-    public Map<Character,Integer> getFrequencyMap(byte[] arr) throws IOException, ClassNotFoundException {
-        if(arr==null || arr.length==0){
-            throw new RuntimeException("Input byte Array is Empty!!");
-        }
-
-        Map<Character,Integer> map;
-        int i=0;
-        for(byte x:arr){
-            if((char) x == '\n'){
-                break;
-            }
-            else
-                mapsize=mapsize*10+Integer.parseInt((char)x+"");
-            i++;
-        }
-        mapsize = mapsize+i+1;
-
-        byte[] b1= Arrays.copyOfRange(arr,i+1, mapsize);
-
-        ByteArrayInputStream bStream=new ByteArrayInputStream(b1);
-        ObjectInputStream serial=new ObjectInputStream(bStream);
-        map= (Map<Character, Integer>) serial.readObject();
-        serial.close();
-        bStream.close();
-
-        return map;
-    }
     @Override
     public Node regenerateTree(Map<Character, Integer> map) {
         if(map==null||map.size()==0){

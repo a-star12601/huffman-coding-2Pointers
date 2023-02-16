@@ -13,7 +13,9 @@ import com.capillary.app.zipper.decompression.IDecompressionTree;
 import com.capillary.app.zipper.IZipperUnzipper;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -44,12 +46,9 @@ public class NativeHuffmanZipperUnzipper implements IZipperUnzipper {
 
             ICompression comp = new NativeHuffmanCompression();
             List<Byte> encodedList = comp.getCompressedBytes(inputBytes,hash);
-            byte[] headerContent = comp.getHeader(map);
             byte[] encodedBytes = f.byteFromByteList(encodedList);
-
-            f.writeToFile(compressedFile, false, headerContent);
-            f.writeToFile(compressedFile,true, encodedBytes);
-        } catch (IOException e) {
+            comp.writeObjects(map,encodedBytes,compressedFile);
+            } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -57,14 +56,22 @@ public class NativeHuffmanZipperUnzipper implements IZipperUnzipper {
     public void decompress(String compressedFile, String decompressedFile) {
         try {
             FileOperations f = new FileOperations();
-            byte[] compressBytes = f.readFile(compressedFile);
-
             IDecompressionTree dTree = new NativeHuffmanDecompressionTree();
-            Map<Character,Integer> map = dTree.getFrequencyMap(compressBytes);
+
+            FileInputStream fin = new FileInputStream(compressedFile);
+            ObjectInputStream in = new ObjectInputStream(fin);
+
+            Map<Character,Integer> map= (Map<Character, Integer>) in.readObject();
+            byte[] compressBytes = (byte[]) in.readObject();
+
+            in.close();
+            fin.close();
+
+
             Node tree=dTree.regenerateTree(map);
 
             IDecompression decomp = new NativeHuffmanDecompression();
-            byte[] exportBytes=decomp.getDecompressedBytes(compressBytes,tree,dTree.getMapSize(),decomp.getCharCount(map));
+            byte[] exportBytes=decomp.getDecompressedBytes(compressBytes,tree,decomp.getCharCount(map));
 
             f.writeToFile(decompressedFile,false,exportBytes);
         } catch (IOException | ClassNotFoundException e) {

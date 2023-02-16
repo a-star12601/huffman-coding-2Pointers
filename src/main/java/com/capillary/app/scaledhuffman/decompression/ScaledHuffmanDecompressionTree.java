@@ -16,38 +16,7 @@ import java.util.PriorityQueue;
  */
 public class ScaledHuffmanDecompressionTree implements IDecompressionTree<String> {
 
-    int mapsize=0;
-    public long getMapSize(){
-        return mapsize;
-    }
 
-    @Override
-    public Map<String,Integer> getFrequencyMap(byte[] arr) throws IOException, ClassNotFoundException {
-        if(arr==null || arr.length==0){
-            throw new RuntimeException("Input file is Empty");
-        }
-        Map<String,Integer> map;
-        int i=0;
-        for(byte x:arr){
-            if((char) x=='\n'){
-                break;
-            }
-            else
-                mapsize=mapsize*10+Integer.parseInt((char)x+"");
-            i++;
-        }
-        mapsize=mapsize+i+1;
-        byte[] b1= Arrays.copyOfRange(arr,i+1,mapsize);
-
-        ByteArrayInputStream bStream=new ByteArrayInputStream(b1);
-        ObjectInputStream serial=new ObjectInputStream(bStream);
-
-        map=(Map<String, Integer>) serial.readObject();
-        serial.close();
-        bStream.close();
-
-        return map;
-    }
     @Override
     public Node regenerateTree(Map<String, Integer> map) {
         if(map==null || map.size()==0){
