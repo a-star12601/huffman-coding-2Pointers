@@ -51,7 +51,7 @@ public class Node {
     public Node(Node left,Node right){
         freq = left.freq + right.freq;
         value = left.value + right.value;
-        this.leftNode =left;
+        leftNode =left;
         rightNode =right;
     }
 }

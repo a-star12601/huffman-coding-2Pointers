@@ -1,6 +1,6 @@
 package com.capillary.app.nativehuffman.compression;
 
-import com.capillary.app.interfaces.compression.ICompression;
+import com.capillary.app.zipper.compression.ICompression;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -12,25 +12,23 @@ import java.util.Map;
 /**
  * Class for root.general Tree-Based Encoders.
  */
-public class NativeHuffmanCompression implements ICompression {
+public class NativeHuffmanCompression implements ICompression<Character> {
+
     @Override
-    public byte[] getSerializedMap(Map<?,Integer> map) throws IOException {
+    public byte[] getHeader(Map<Character,Integer> map) throws IOException {
+        if(map == null || map.isEmpty()){
+            throw new RuntimeException("Map is Null/Empty!!");
+        }
+
         ByteArrayOutputStream bStream = new ByteArrayOutputStream();
         ObjectOutputStream serial = new ObjectOutputStream(bStream);
 
         serial.writeObject(map);
         serial.close();
 
-        byte[] b = bStream.toByteArray();
-        bStream.close();
-
-        return b;
-    }
-
-    @Override
-    public byte[] getHeader(Map<?,Integer> map) throws IOException {
-        byte[] mapContent= getSerializedMap(map);
+        byte[] mapContent = bStream.toByteArray();
         byte[] mapSize=(mapContent.length+"\n").getBytes();
+        bStream.close();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
         outputStream.write( mapSize );
@@ -43,7 +41,7 @@ public class NativeHuffmanCompression implements ICompression {
     }
 
     @Override
-    public List<Byte> getCompressedBytes(byte[] arr, Map<?,String> hash){
+    public List<Byte> getCompressedBytes(byte[] arr, Map<Character,String> hash){
         String byteArr="";
         String currentByte="";
         List<Byte> bytes=new ArrayList<>();

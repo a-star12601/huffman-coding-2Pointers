@@ -1,9 +1,9 @@
 package com.capillary.app;
 
 import com.capillary.app.general.CompressionStats;
-import com.capillary.app.zipper.NativeHuffmanZipperUnzipper;
+import com.capillary.app.nativehuffman.NativeHuffmanZipperUnzipper;
 import com.capillary.app.zipper.IZipperUnzipper;
-import com.capillary.app.zipper.ScaledHuffmanZipperUnzipper;
+import com.capillary.app.scaledhuffman.ScaledHuffmanZipperUnzipper;
 
 import java.util.Scanner;
 
@@ -26,6 +26,9 @@ public class Main{
 
         System.out.print("Enter Compressed Filename : ");
         String compressed=s.nextLine();
+
+        System.out.print("Enter Decompressed Filename : ");
+        String decompressed=s.nextLine();
 
         int choice=1;
 
@@ -52,12 +55,12 @@ public class Main{
             long compressionTime = end - start;
 
             start = System.currentTimeMillis();
-            fileZipper.decompress(compressed);
+            fileZipper.decompress(compressed, decompressed);
             end = System.currentTimeMillis();
             long decompressionTime = end - start;
 
             CompressionStats st=new CompressionStats();
-            st.getStats(filename,compressed,"DEC"+compressed,compressionTime,decompressionTime);
+            st.getStats(filename,compressed,decompressed,compressionTime,decompressionTime);
         } else if (!fileZipper.CheckFileExists(filename)) {
             System.out.println("File Doesn't Exist!!");
         }

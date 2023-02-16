@@ -22,5 +22,3 @@ r
 Bsrc/test/java/com/capillary/app/decompression/TreeDecoderTest.java,0/e/0e15c517b39f2525ca609c315dadccf71f5f0968
 8
 test.txt,4/b/4b6fcb2d521ef0fd442a5301e7932d16cc9f375a
-]
--src/test/java/com/capillary/app/MainTest.java,2/d/2d38458f6e26481f904d98f1c8468e16bacb2e23

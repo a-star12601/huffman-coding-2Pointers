@@ -1,6 +1,6 @@
 package com.capillary.app.scaledhuffman.compression;
 
-import com.capillary.app.interfaces.compression.ICompression;
+import com.capillary.app.zipper.compression.ICompression;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -12,14 +12,21 @@ import java.util.List;
 /**
  * Class for root.general Tree-Based Encoders.
  */
-public class ScaledHuffmanCompression implements ICompression {
+public class ScaledHuffmanCompression implements ICompression<String> {
     @Override
-    public byte[] getHeader(Map<?,Integer> map) throws IOException {
-        byte[] mapContent= getSerializedMap(map);
-        byte[] header=(mapContent.length+"\n").getBytes();
+    public byte[] getHeader(Map<String,Integer> map) throws IOException {
+        ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+        ObjectOutputStream serial = new ObjectOutputStream(bStream);
+
+        serial.writeObject(map);
+        serial.close();
+
+        byte[] mapContent = bStream.toByteArray();
+        byte[] mapSize=(mapContent.length+"\n").getBytes();
+        bStream.close();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
-        outputStream.write( header );
+        outputStream.write( mapSize );
         outputStream.write( mapContent );
 
         byte exportBytes[] = outputStream.toByteArray( );
@@ -35,7 +42,7 @@ public class ScaledHuffmanCompression implements ICompression {
     }
 
     @Override
-    public List<Byte> getCompressedBytes(byte[] arr, Map<?,String> hash){
+    public List<Byte> getCompressedBytes(byte[] arr, Map<String,String> hash){
         String byteArr="";
         String currentByte="";
         String curWord="";
@@ -79,17 +86,5 @@ public class ScaledHuffmanCompression implements ICompression {
             bytes.add(b);
         }
         return bytes;
-    }
-    public byte[] getSerializedMap(Map<?,Integer> map) throws IOException {
-        ByteArrayOutputStream bStream=new ByteArrayOutputStream();
-        ObjectOutputStream serial=new ObjectOutputStream(bStream);
-
-        serial.writeObject(map);
-        serial.close();
-
-        byte[] b= bStream.toByteArray();
-        bStream.close();
-
-        return b;
     }
 }

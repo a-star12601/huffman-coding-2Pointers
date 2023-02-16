@@ -1,19 +1,19 @@
 package com.capillary.app.scaledhuffman.decompression;
 
 import com.capillary.app.general.Node;
-import com.capillary.app.interfaces.decompression.IDecompression;
+import com.capillary.app.zipper.decompression.IDecompression;
 
 import java.util.Map;
 
 /**
  * Class for root.general Tree-Based Decoders.
  */
-public class ScaledHuffmanDecompression implements IDecompression {
+public class ScaledHuffmanDecompression implements IDecompression<String> {
 
     @Override
-    public int getCharCount(Map<?,Integer> map) {
+    public int getCharCount(Map<String,Integer> map) {
         int count=0;
-        for(Map.Entry<?, Integer> entry:map.entrySet()){
+        for(Map.Entry<String, Integer> entry:map.entrySet()){
             count+=entry.getKey().toString().length() * entry.getValue();
         }
         return count;

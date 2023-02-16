@@ -2,7 +2,7 @@ package com.capillary.app.scaledhuffman.decompression;
 
 import com.capillary.app.general.Node;
 import com.capillary.app.general.NodeComparator;
-import com.capillary.app.interfaces.decompression.IDecompressionTree;
+import com.capillary.app.zipper.decompression.IDecompressionTree;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.util.PriorityQueue;
 /**
  * Class for performing Huffman decoding.
  */
-public class ScaledHuffmanDecompressionTree implements IDecompressionTree {
+public class ScaledHuffmanDecompressionTree implements IDecompressionTree<String> {
 
     int mapsize=0;
     public long getMapSize(){
@@ -49,13 +49,13 @@ public class ScaledHuffmanDecompressionTree implements IDecompressionTree {
         return map;
     }
     @Override
-    public Node regenerateTree(Map<?, Integer> map) {
+    public Node regenerateTree(Map<String, Integer> map) {
         if(map==null || map.size()==0){
             throw new RuntimeException("Map is empty!!");
         }
 
         PriorityQueue<Node> q=new PriorityQueue<>(new NodeComparator());
-        for(Map.Entry<?, Integer> entry:map.entrySet()) {
+        for(Map.Entry<String, Integer> entry:map.entrySet()) {
             Node temp=new Node( entry.getKey().toString(),entry.getValue());
             q.add(temp);
         }

@@ -21,7 +21,7 @@ public class FileOperations {
     public byte[] readFile(String filename) throws IOException{
         File file = new File(filename);
         FileInputStream input = null;
-        byte[] arr=new byte[0];
+        byte[] arr;
         input = new FileInputStream(file);
         arr = new byte[(int) file.length()];
         input.read(arr);
