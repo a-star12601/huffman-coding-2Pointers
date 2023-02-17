@@ -5,7 +5,4 @@ public interface IZipperUnzipper {
 
     public void decompress(String compressedFile, String decompressedFile);
 
-    public boolean CheckFileNotEmpty(String filename);
-
-    public boolean CheckFileExists(String filename);
 }

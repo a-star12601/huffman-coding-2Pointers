@@ -6,10 +6,10 @@ import java.util.Arrays;
 
 public class CompressionStats {
     public boolean compareFiles(String file1, String file2){
-        FileOperations f=new FileOperations();
+        FileRead f=new FileRead();
         try {
-            byte[] arr1 = f.readFile(file1);
-            byte[] arr2= f.readFile(file2);
+            byte[] arr1 = f.readComp(file1);
+            byte[] arr2= f.readComp(file2);
             if(Arrays.equals(arr1,arr2)){
                 return true;
             }

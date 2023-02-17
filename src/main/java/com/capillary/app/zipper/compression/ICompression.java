@@ -9,6 +9,17 @@ import java.util.Map;
  * The interface for a root.general Encoder.
  */
 public interface ICompression<T> {
+
+    default byte[] byteFromByteList(List<Byte> bytes){
+        byte[] exportBytes=new byte[bytes.size()];
+        int i=0;
+        for(Byte b:bytes){
+            exportBytes[i++]=b.byteValue();
+        }
+        return exportBytes;
+    }
+
+
     /**
      * Method to Encode text.
      *
@@ -18,14 +29,4 @@ public interface ICompression<T> {
      * @throws FileNotFoundException the file not found exception
      */
     List<Byte> getCompressedBytes(byte[] arr, Map<T,String> hash);
-
-    /**
-     * Serialise and store map into compressed file.
-     *
-     * @param map the map
-     * @return the byte [ ]
-     * @throws IOException the io exception
-     */
-    void writeObjects(Map<T,Integer> map,byte[] arr,String compressedFile) throws IOException;
-
 }

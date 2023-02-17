@@ -114,7 +114,7 @@ public class NativeHuffmanCompressionTreeTest {
     }
 
     @Test
-    public void getHashTable_NormalCase() {
+    public void testGetHashTable_NormalCase() {
         Node child1=new Node("a",3);
         Node child2=new Node("b",2);
         Node child3=new Node("c",1);
@@ -131,7 +131,7 @@ public class NativeHuffmanCompressionTreeTest {
     }
 
     @Test
-    public void getHashTable_TreeIsNull() {
+    public void testGetHashTable_TreeIsNull() {
         Node tree = null;
 
         assertThrows(RuntimeException.class, () -> cTree.getHashTable(tree));

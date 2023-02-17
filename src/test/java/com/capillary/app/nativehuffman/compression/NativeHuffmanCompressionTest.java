@@ -1,18 +1,16 @@
 package com.capillary.app.nativehuffman.compression;
 
+import com.capillary.app.zipper.compression.ICompression;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.*;
 
 import static org.junit.Assert.*;
 
 public class NativeHuffmanCompressionTest {
-    NativeHuffmanCompression cObj;
+    ICompression cObj;
     @Before
     public void setUp() throws Exception {
         cObj = new NativeHuffmanCompression();
@@ -23,50 +21,9 @@ public class NativeHuffmanCompressionTest {
     }
 
 
-    @Test
-    public void getHeader_NormalCase() throws IOException {
-        Map<Character, Integer> mp = new HashMap<>();
-        mp.put('a', 3);
-        mp.put('b', 2);
-        mp.put('c', 1);
-
-        ByteArrayOutputStream bStream = new ByteArrayOutputStream();
-        ObjectOutputStream serial = new ObjectOutputStream(bStream);
-
-        serial.writeObject(mp);
-        serial.close();
-
-        byte[] mapContent = bStream.toByteArray();
-        byte[] mapSize=(mapContent.length+"\n").getBytes();
-        bStream.close();
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
-        outputStream.write( mapSize );
-        outputStream.write( mapContent );
-
-        byte expected[] = outputStream.toByteArray( );
-        outputStream.close();
-
-        byte[] result= cObj.writeObjects(mp);
-        assertArrayEquals(expected,result);
-    }
 
     @Test
-    public void getHeader_MapIsNull() throws IOException {
-        Map<Character, Integer> mp = null;
-
-        assertThrows(RuntimeException.class, () -> cObj.writeObjects(mp));
-    }
-
-    @Test
-    public void getHeader_MapIsEmpty() throws IOException {
-        Map<Character, Integer> mp = new HashMap<>();
-
-        assertThrows(RuntimeException.class, () -> cObj.writeObjects(mp));
-    }
-
-    @Test
-    public void getCompressedBytes() {
+    public void testGetCompressedBytes_NormalCase() {
         byte[] inputByteArray = "abcaba".getBytes();
 
         Map<Character, String> inputTable = new HashMap<>();
@@ -80,5 +37,28 @@ public class NativeHuffmanCompressionTest {
         List<Byte> result = cObj.getCompressedBytes(inputByteArray, inputTable);
 
         assertEquals(expected,result);
+    }
+
+    @Test
+    public void testGetCompressedBytes_ArrayNullCase(){
+        assertThrows(RuntimeException.class, ()->cObj.getCompressedBytes(null,new HashMap<>()));
+    }
+
+    @Test
+    public void testGetCompressedBytes_ArrayEmptyCase(){
+        assertThrows(RuntimeException.class, ()->cObj.getCompressedBytes(new byte[0],new HashMap<>()));
+    }
+    @Test
+    public void testGetCompressedBytes_HashMapNullCase(){
+        assertThrows(RuntimeException.class, ()->cObj.getCompressedBytes("abc".getBytes(),null));
+    }
+
+    @Test
+    public void testByteFromByteList(){
+        List<Byte> input=Arrays.asList(new Byte[]{-115,0});
+        byte[] expected=new byte[]{-115,0};
+        byte[] result= cObj.byteFromByteList(input);
+        assertArrayEquals(expected,result);
+
     }
 }

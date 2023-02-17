@@ -1,6 +1,7 @@
 package com.capillary.app;
 
 import com.capillary.app.general.CompressionStats;
+import com.capillary.app.general.Validator;
 import com.capillary.app.nativehuffman.NativeHuffmanZipperUnzipper;
 import com.capillary.app.zipper.IZipperUnzipper;
 import com.capillary.app.scaledhuffman.ScaledHuffmanZipperUnzipper;
@@ -46,9 +47,9 @@ public class Main{
             System.out.println("Invalid Choice!!");
             System.exit(0);
         }
+        Validator v = new Validator();
 
-
-        if(fileZipper.CheckFileExists(filename) && fileZipper.CheckFileNotEmpty(filename)){
+        if(v.checkFileExists(filename) && v.checkFileNotEmpty(filename)){
             long start = System.currentTimeMillis();
             fileZipper.compress(filename, compressed);
             long end = System.currentTimeMillis();
@@ -61,10 +62,10 @@ public class Main{
 
             CompressionStats st=new CompressionStats();
             st.getStats(filename,compressed,decompressed,compressionTime,decompressionTime);
-        } else if (!fileZipper.CheckFileExists(filename)) {
+        } else if (!v.checkFileExists(filename)) {
             System.out.println("File Doesn't Exist!!");
         }
-        else if(!fileZipper.CheckFileNotEmpty(filename)){
+        else if(!v.checkFileNotEmpty(filename)){
             System.out.println("File is empty!!");
         }
     }

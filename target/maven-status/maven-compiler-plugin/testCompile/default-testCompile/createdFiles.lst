@@ -1,0 +1,12 @@
+com/capillary/app/scaledhuffman/ScaledHuffmanZipperUnzipperTest.class
+com/capillary/app/scaledhuffman/decompression/ScaledHuffmanDecompressionTest.class
+com/capillary/app/scaledhuffman/compression/ScaledHuffmanCompressionTreeTest.class
+com/capillary/app/scaledhuffman/decompression/ScaledHuffmanDecompressionTreeTest.class
+com/capillary/app/general/NodeComparatorTest.class
+com/capillary/app/scaledhuffman/compression/ScaledHuffmanCompressionTest.class
+com/capillary/app/nativehuffman/compression/NativeHuffmanCompressionTreeTest.class
+com/capillary/app/nativehuffman/decompression/NativeHuffmanDecompressionTreeTest.class
+com/capillary/app/nativehuffman/decompression/NativeHuffmanDecompressionTest.class
+com/capillary/app/MainTest.class
+com/capillary/app/nativehuffman/NativeHuffmanZipperUnzipperTest.class
+com/capillary/app/nativehuffman/compression/NativeHuffmanCompressionTest.class

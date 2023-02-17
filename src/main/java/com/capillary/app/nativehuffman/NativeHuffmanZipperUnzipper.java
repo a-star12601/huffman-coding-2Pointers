@@ -1,7 +1,6 @@
 package com.capillary.app.nativehuffman;
 
-import com.capillary.app.general.FileOperations;
-import com.capillary.app.general.Node;
+import com.capillary.app.general.*;
 import com.capillary.app.nativehuffman.compression.NativeHuffmanCompression;
 import com.capillary.app.nativehuffman.compression.NativeHuffmanCompressionTree;
 import com.capillary.app.nativehuffman.decompression.NativeHuffmanDecompression;
@@ -12,31 +11,42 @@ import com.capillary.app.zipper.decompression.IDecompression;
 import com.capillary.app.zipper.decompression.IDecompressionTree;
 import com.capillary.app.zipper.IZipperUnzipper;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.List;
 import java.util.Map;
 
 public class NativeHuffmanZipperUnzipper implements IZipperUnzipper {
+    private FileRead fr;
+    private ICompressionTree cTree;
+    private ICompression comp;
+    private FileWrite fw;
+    private IDecompressionTree dTree;
+    private IDecompression decomp;
 
-    public boolean CheckFileNotEmpty(String filename){
-        File f=new File(filename);
-        return f.length()!=0;
+
+    public NativeHuffmanZipperUnzipper(){
+        fr = new FileRead<Character>();
+        cTree = new NativeHuffmanCompressionTree();
+        comp = new NativeHuffmanCompression();
+        fw = new FileWrite<Character>();
+        dTree = new NativeHuffmanDecompressionTree();
+        decomp = new NativeHuffmanDecompression();
     }
 
-    public boolean CheckFileExists(String filename){
-        File f=new File(filename);
-        return f.exists();
+    public NativeHuffmanZipperUnzipper(FileRead fr, ICompressionTree cTree, ICompression comp,
+                                       FileWrite fw, IDecompressionTree dTree, IDecompression decomp){
+        this.fr = fr;
+        this.cTree = cTree;
+        this.comp = comp;
+        this.fw = fw;
+        this.dTree = dTree;
+        this.decomp = decomp;
     }
 
     public void compress(String originalFile, String compressedFile){
         try {
-            FileOperations f = new FileOperations();
-            byte[] inputBytes = f.readFile(originalFile);
+            byte[] inputBytes = fr.readComp(originalFile);
 
-            ICompressionTree cTree = new NativeHuffmanCompressionTree();
             Map<Character,Integer> map= cTree.getFrequencyMap(inputBytes);
             Node tree=cTree.generateTree(map);
             Map<Character,String> hash= cTree.getHashTable(tree);
@@ -44,37 +54,27 @@ public class NativeHuffmanZipperUnzipper implements IZipperUnzipper {
             double average=WAvg(map,hash);
             System.out.println("Average LPC : "+average);
 
-            ICompression comp = new NativeHuffmanCompression();
             List<Byte> encodedList = comp.getCompressedBytes(inputBytes,hash);
-            byte[] encodedBytes = f.byteFromByteList(encodedList);
-            comp.writeObjects(map,encodedBytes,compressedFile);
-            } catch (IOException e) {
+            byte[] encodedBytes = comp.byteFromByteList(encodedList);
+
+            fw.writeComp(map,encodedBytes,compressedFile);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     public void decompress(String compressedFile, String decompressedFile) {
         try {
-            FileOperations f = new FileOperations();
-            IDecompressionTree dTree = new NativeHuffmanDecompressionTree();
-
-            FileInputStream fin = new FileInputStream(compressedFile);
-            ObjectInputStream in = new ObjectInputStream(fin);
-
-            Map<Character,Integer> map= (Map<Character, Integer>) in.readObject();
-            byte[] compressBytes = (byte[]) in.readObject();
-
-            in.close();
-            fin.close();
-
+            ComplexReturnType crt = fr.readDecomp(compressedFile);
+            Map<Character, Integer> map = crt.getMap();
+            byte[] compressBytes = crt.getByteArray();
 
             Node tree=dTree.regenerateTree(map);
 
-            IDecompression decomp = new NativeHuffmanDecompression();
             byte[] exportBytes=decomp.getDecompressedBytes(compressBytes,tree,decomp.getCharCount(map));
 
-            f.writeToFile(decompressedFile,false,exportBytes);
-        } catch (IOException | ClassNotFoundException e) {
+            fw.writeDecomp(decompressedFile,false,exportBytes);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

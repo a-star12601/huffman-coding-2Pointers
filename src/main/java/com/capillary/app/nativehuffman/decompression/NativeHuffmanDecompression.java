@@ -18,6 +18,7 @@ public class NativeHuffmanDecompression implements IDecompression<Character> {
         return count;
     }
 
+    @Override
     public byte[] getDecompressedBytes(byte[] arr, Node tree, long count){
         byte[] bytes=new byte[(int) count];
         int curbyte = -1;
