@@ -55,7 +55,7 @@ public class Main{
         }
         Validator v = new Validator();
 
-        if(v.checkFileExists(filename) && v.checkFileNotEmpty(filename)){
+        if(v.validate(filename,compressed,decompressed)){
             long start = System.currentTimeMillis();
             fileZipper.compress(filename, compressed);
             long end = System.currentTimeMillis();
@@ -68,11 +68,6 @@ public class Main{
 
             CompressionStats st=new CompressionStats();
             st.getStats(filename,compressed,decompressed,compressionTime,decompressionTime);
-        } else if (!v.checkFileExists(filename)) {
-            System.out.println("File Doesn't Exist!!");
-        }
-        else if(!v.checkFileNotEmpty(filename)){
-            System.out.println("File is empty!!");
         }
     }
 }
