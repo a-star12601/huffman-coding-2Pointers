@@ -1,4 +1,4 @@
-package com.capillary.app.hybridhuffman.compression;
+package com.capillary.app.lengthhuffman.compression;
 
 import com.capillary.app.general.Node;
 import com.capillary.app.general.NodeComparator;
@@ -11,7 +11,7 @@ import java.util.PriorityQueue;
 /**
  * Class for performing Huffman Encoding.
  */
-public class HybridHuffmanCompressionTree implements ICompressionTree<String> {
+public class LengthHuffmanCompressionTree implements ICompressionTree<String> {
 
     private static boolean isLetterOrDigit(char c) {
         return (c >= 'a' && c <= 'z') ||
@@ -24,6 +24,10 @@ public class HybridHuffmanCompressionTree implements ICompressionTree<String> {
         if(arr==null || arr.length==0){
             throw new RuntimeException("Input file is Empty");
         }
+
+        int count1=0, count2=0;
+        int freq=0;
+        double avg1, avg2;
 
         Map<String,Integer> map=new HashMap<>();
         String curWord="";
@@ -57,7 +61,16 @@ public class HybridHuffmanCompressionTree implements ICompressionTree<String> {
         Map<String, Integer> sortedMap = new LinkedHashMap<>();
         for (Map.Entry<String, Integer> l : list) {
             sortedMap.put(l.getKey(), l.getValue());
+            count1 += l.getKey().length();
+            count2 += l.getKey().length() * l.getValue();
+            freq += l.getValue();
         }
+
+        avg1 = count1 / sortedMap.size();
+        avg2 = count2 / freq;
+
+        System.out.println("Avg without Freq : " + avg1);
+        System.out.println("Avg with Freq : " + avg2);
 
         Map<String, Integer> mp = new LinkedHashMap<>();
 
@@ -69,15 +82,20 @@ public class HybridHuffmanCompressionTree implements ICompressionTree<String> {
                 i++;
             }else{
                 String k = m.getKey();
-                if(k.length() > 1){
-                    for(char c : k.toCharArray()){
-                        mp.put(c+"", mp.getOrDefault(c+"", 0)+m.getValue());
-                    }
+                if(k.length() > avg1 + 5){
+                    mp.put(m.getKey(), m.getValue());
                 }else{
-                    mp.put(k, mp.getOrDefault(k, 0)+m.getValue());
+                    if(k.length() > 1){
+                        for(char c : k.toCharArray()){
+                            mp.put(c+"", mp.getOrDefault(c+"", 0)+m.getValue());
+                        }
+                    }else{
+                        mp.put(k, mp.getOrDefault(k, 0)+m.getValue());
+                    }
                 }
             }
         }
+
 //        System.out.println(mp.size());
         return mp;
     }

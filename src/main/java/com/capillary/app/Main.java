@@ -3,6 +3,7 @@ package com.capillary.app;
 import com.capillary.app.general.CompressionStats;
 import com.capillary.app.general.Validator;
 import com.capillary.app.hybridhuffman.HybridHuffmanZipperUnzipper;
+import com.capillary.app.lengthhuffman.LengthHuffmanZipperUnzipper;
 import com.capillary.app.nativehuffman.NativeHuffmanZipperUnzipper;
 import com.capillary.app.scaledhuffman.ScaledHuffmanZipperUnzipper;
 import com.capillary.app.zipper.IZipperUnzipper;
@@ -43,16 +44,25 @@ public class Main{
 
 
         IZipperUnzipper fileZipper = new NativeHuffmanZipperUnzipper();
-        if(choice == 1){
-            fileZipper = new NativeHuffmanZipperUnzipper();
-        }else if (choice == 2) {
-            fileZipper = new ScaledHuffmanZipperUnzipper();
-        } else if (choice == 3) {
-            fileZipper =  new HybridHuffmanZipperUnzipper();
-        }else{
-            System.out.println("Invalid Choice!!");
-            System.exit(0);
+
+        switch (choice){
+            case 1:
+                fileZipper = new NativeHuffmanZipperUnzipper();
+                break;
+            case 2:
+                fileZipper = new ScaledHuffmanZipperUnzipper();
+                break;
+            case 3:
+                fileZipper = new HybridHuffmanZipperUnzipper();
+                break;
+            case 4:
+                fileZipper = new LengthHuffmanZipperUnzipper();
+                break;
+            default:
+                System.out.println("Invalid Choice!!");
+                System.exit(0);
         }
+
         Validator v = new Validator();
 
         if(v.validate(filename,compressed,decompressed)){
