@@ -1,7 +1,6 @@
 package com.capillary.app.scaledhuffman.compression;
 
 import com.capillary.app.general.Node;
-import com.capillary.app.nativehuffman.compression.NativeHuffmanCompressionTree;
 import com.capillary.app.zipper.compression.ICompressionTree;
 import org.junit.After;
 import org.junit.Before;

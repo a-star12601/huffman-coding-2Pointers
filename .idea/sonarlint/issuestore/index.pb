@@ -18,5 +18,3 @@ v
 Fsrc/test/java/com/capillary/app/decompression/HuffmanDecodingTest.java,0/8/08d5ed7df3ed4e42aeb5758e7d653d0459fff7ab
 r
 Bsrc/test/java/com/capillary/app/decompression/TreeDecoderTest.java,0/e/0e15c517b39f2525ca609c315dadccf71f5f0968
-8
-test.txt,4/b/4b6fcb2d521ef0fd442a5301e7932d16cc9f375a

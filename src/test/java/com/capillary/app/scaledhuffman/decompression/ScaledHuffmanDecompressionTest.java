@@ -1,7 +1,6 @@
 package com.capillary.app.scaledhuffman.decompression;
 
 import com.capillary.app.general.Node;
-import com.capillary.app.nativehuffman.decompression.NativeHuffmanDecompression;
 import com.capillary.app.zipper.decompression.IDecompression;
 import org.junit.After;
 import org.junit.Before;

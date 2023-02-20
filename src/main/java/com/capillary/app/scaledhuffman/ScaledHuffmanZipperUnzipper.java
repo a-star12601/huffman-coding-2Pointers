@@ -1,10 +1,6 @@
 package com.capillary.app.scaledhuffman;
 
 import com.capillary.app.general.*;
-import com.capillary.app.nativehuffman.compression.NativeHuffmanCompression;
-import com.capillary.app.nativehuffman.compression.NativeHuffmanCompressionTree;
-import com.capillary.app.nativehuffman.decompression.NativeHuffmanDecompression;
-import com.capillary.app.nativehuffman.decompression.NativeHuffmanDecompressionTree;
 import com.capillary.app.scaledhuffman.compression.ScaledHuffmanCompression;
 import com.capillary.app.scaledhuffman.compression.ScaledHuffmanCompressionTree;
 import com.capillary.app.scaledhuffman.decompression.ScaledHuffmanDecompression;
@@ -15,7 +11,6 @@ import com.capillary.app.zipper.decompression.IDecompression;
 import com.capillary.app.zipper.decompression.IDecompressionTree;
 import com.capillary.app.zipper.IZipperUnzipper;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
