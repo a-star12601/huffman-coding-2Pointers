@@ -79,7 +79,6 @@ public class HybridHuffmanCompressionTree implements ICompressionTree<String> {
             }
         }
 
-        System.out.println(mp.size());
         return mp;
     }
 
