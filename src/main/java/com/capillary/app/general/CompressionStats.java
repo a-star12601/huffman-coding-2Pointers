@@ -3,8 +3,11 @@ package com.capillary.app.general;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.logging.Logger;
 
 public class CompressionStats {
+    Logger logger = Logger.getLogger(CompressionStats.class.getName());
+
     public boolean compareFiles(String file1, String file2){
         FileRead f=new FileRead();
         try {
@@ -34,15 +37,16 @@ public class CompressionStats {
             File df = new File(decompressedFile);
             long dfl = df.length();
 
-            System.out.println("\n********** Operation Successful **********\n");
-            System.out.println("Compress Time : " + compressionTime + " ms");
-            System.out.println("Decompress Time : " + decompressionTime + " ms");
-            System.out.println("Original File Size : " + (float) ofl/(1024*1024) + " MB");
-            System.out.println("Compressed File Size : " + (float) cfl/(1024*1024) + " MB");
-            System.out.println("Decompressed File Size : " + (float) dfl/(1024*1024) + " MB");
-            System.out.println("Compression Ratio : " + ((float)(ofl-cfl)/ofl)*100 + " %");
+
+            logger.info("\n********** Operation Successful **********\n"+
+                    "\nCompress Time : " + compressionTime + " ms"+
+                    "\nDecompress Time : " + decompressionTime + " ms"+
+                    "\nOriginal File Size : " + (float) ofl/(1024*1024) + " MB"+
+                    "\nCompressed File Size : " + (float) cfl/(1024*1024) + " MB"+
+                    "\nDecompressed File Size : " + (float) dfl/(1024*1024) + " MB"+
+                    "\nCompression Ratio : " + ((float)(ofl-cfl)/ofl)*100 + " %");
         }else {
-            System.out.println("\n********** Operation Failed **********\n");
+            logger.info("\n********** Operation Failed **********\n");
         }
     }
 }
