@@ -22,6 +22,100 @@ public class HybridHuffmanCompressionTree implements ICompressionTree<String> {
                 (c >= '0' && c <= '9');
     }
 
+    private long getFileSize(Map<String,Integer> map,Map<String,String> hash){
+        long sum=0;
+        for(Map.Entry<String,Integer> m: map.entrySet()){
+            sum+=m.getValue()*hash.get(m.getKey()).length();
+        }
+        return (long) Math.ceil(sum/8);
+    }
+
+    private int getMapSize(Map<String, Integer> mp) {
+
+        ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
+        ObjectOutputStream objectOutputStream = null;
+        try {
+            objectOutputStream = new ObjectOutputStream(byteOutputStream);
+            objectOutputStream.writeObject(mp);
+            objectOutputStream.flush();
+            objectOutputStream.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return byteOutputStream.toByteArray().length;
+    }
+
+    private Map<String, Integer> generateDynamicMap(Map<String, Integer> sortedMap, double percentage){
+        Map<String, Integer> mp = new LinkedHashMap<>();
+
+        int limit = (int) Math.ceil(sortedMap.size() *  (percentage/100));
+        int i=0;
+        for (Map.Entry<String, Integer> m : sortedMap.entrySet()){
+            if(i<limit){
+                mp.put(m.getKey(), m.getValue());
+                i++;
+            }else{
+                String k = m.getKey();
+                if(k.length() > 1){
+                    for(char c : k.toCharArray()){
+                        mp.put(c+"", mp.getOrDefault(c+"", 0)+m.getValue());
+                    }
+                }else{
+                    mp.put(k, mp.getOrDefault(k, 0)+m.getValue());
+                }
+            }
+        }
+//        System.out.println(mp.size());
+        return mp;
+    }
+
+    private double probability(double f1, double f2, double temp) {
+        if (f2 < f1) return 1;
+        return Math.exp((f1 - f2) / temp);
+    }
+
+    private double SimulatedAnnealing(Map<String,Integer> mp) {
+        double temperature = 1000;
+        double coolingFactor = 0.2;
+
+        double[] best = new double[]{Integer.MAX_VALUE, 0};
+        double[] current = new double[]{Integer.MAX_VALUE, 0};
+
+        Map<String,Integer> tempMap;
+        Node tree;
+        Map<String,String> hash;
+        long mapSize=-1, fileSize=-1;
+
+        while(temperature > 1){
+            double[] randomArray = new double[2];
+            double percentage = Math.random() * 100.0;
+
+            tempMap = generateDynamicMap(mp, percentage);
+            tree = generateTree(tempMap);
+            hash = getHashTable(tree);
+
+            fileSize= getFileSize(tempMap, hash);
+            mapSize = getMapSize(tempMap);
+
+            randomArray[0] = fileSize+mapSize;
+            randomArray[1] = percentage;
+
+            if(probability(current[0], randomArray[0], temperature) > Math.random()){
+                current[0] = randomArray[0];
+                current[1] = randomArray[1];
+            }
+
+            if(current[0] < best[0]){
+                best[0] = current[0];
+                best[1] = current[1];
+            }
+
+            temperature = temperature / (1 + coolingFactor * temperature);
+        }
+        return best[1];
+    }
+
     @Override
     public Map<String,Integer> getFrequencyMap(byte[] arr){
         if(arr==null || arr.length==0){
@@ -62,27 +156,12 @@ public class HybridHuffmanCompressionTree implements ICompressionTree<String> {
             sortedMap.put(l.getKey(), l.getValue());
         }
 
-//        Map<String, Integer> mp = new LinkedHashMap<>();
-//
-//        int limit = (int) Math.ceil(sortedMap.size() * 0.2);
-//        int i=0;
-//        for (Map.Entry<String, Integer> m : sortedMap.entrySet()){
-//            if(i<limit){
-//                mp.put(m.getKey(), m.getValue());
-//                i++;
-//            }else{
-//                String k = m.getKey();
-//                if(k.length() > 1){
-//                    for(char c : k.toCharArray()){
-//                        mp.put(c+"", mp.getOrDefault(c+"", 0)+m.getValue());
-//                    }
-//                }else{
-//                    mp.put(k, mp.getOrDefault(k, 0)+m.getValue());
-//                }
-//            }
-//        }
-//        System.out.println(mp.size());
-        return sortedMap;
+        double percentage = SimulatedAnnealing(sortedMap);
+        Map<String,Integer> bestMap = generateDynamicMap(sortedMap, percentage);
+
+        System.out.println(percentage);
+
+        return bestMap;
     }
 
     @Override

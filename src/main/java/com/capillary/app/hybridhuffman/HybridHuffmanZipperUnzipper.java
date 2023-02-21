@@ -85,100 +85,11 @@ public class HybridHuffmanZipperUnzipper implements IZipperUnzipper {
         this.decomp = decomp;
     }
 
-    private long getFileSize(Map<String,Integer> map,Map<String,String> hash){
-        long sum=0;
-        for(Map.Entry<String,Integer> m: map.entrySet()){
-            sum+=m.getValue()*hash.get(m.getKey()).length();
-        }
-        return (long) Math.ceil(sum/8);
-    }
-
-    private int getMapSize(Map<String, Integer> mp) throws IOException {
-
-        ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteOutputStream);
-
-        objectOutputStream.writeObject(mp);
-        objectOutputStream.flush();
-        objectOutputStream.close();
-
-        return byteOutputStream.toByteArray().length;
-    }
-
-    private Map<String, Integer> generateDynamicMap(Map<String, Integer> sortedMap, int percentage){
-        Map<String, Integer> mp = new LinkedHashMap<>();
-
-        int limit = (int) Math.ceil(sortedMap.size() *  ((double) percentage/100));
-        int i=0;
-        for (Map.Entry<String, Integer> m : sortedMap.entrySet()){
-            if(i<limit){
-                mp.put(m.getKey(), m.getValue());
-                i++;
-            }else{
-                String k = m.getKey();
-                if(k.length() > 1){
-                    for(char c : k.toCharArray()){
-                        mp.put(c+"", mp.getOrDefault(c+"", 0)+m.getValue());
-                    }
-                }else{
-                    mp.put(k, mp.getOrDefault(k, 0)+m.getValue());
-                }
-            }
-        }
-//        System.out.println(mp.size());
-        return mp;
-    }
-
-    private Map<String,Integer> getBestMap(Map<String,Integer> mp) throws IOException {
-        Map<String,Integer> tempMap;
-        Node tree;
-        Map<String,String> hash;
-        long mapSize=-1, fileSize=-1;
-
-        long bestSize = Integer.MAX_VALUE;
-        Map<String,Integer> bestMap = new HashMap<>();
-
-        for(int i=0; i<=100; i=i+1){
-            tempMap = generateDynamicMap(mp, i);
-            tree = cTree.generateTree(tempMap);
-            hash = cTree.getHashTable(tree);
-
-            fileSize= getFileSize(tempMap, hash);
-            mapSize = getMapSize(tempMap);
-
-            if(fileSize + mapSize < bestSize){
-                bestSize = fileSize + mapSize;
-                bestMap = tempMap;
-
-//                double average=WAvg(tempMap,hash);
-//
-//                System.out.print("Best Percentage : "+i+" %");
-//                System.out.print("\t\tBest Size : "+ bestSize);
-//                System.out.print("\t\tHeader Ratio : "+ ((double)mapSize/bestSize)*100);
-//                System.out.println("\t\tBits per char : "+ average);
-            }
-
-            double average=WAvg(tempMap,hash);
-
-            System.out.print("Best Percentage : "+i+" %");
-            System.out.print("\t\tBest Size : "+ fileSize + mapSize);
-            System.out.print("\t\tHeader Ratio : "+ ((double)mapSize/(fileSize + mapSize))*100);
-            System.out.println("\t\tBits per char : "+ average);
-        }
-
-
-
-//        System.out.println("Best Percentage : "+bestPercentage+" %");
-        return bestMap;
-    }
-
     public void compress(String originalFile, String compressedFile){
         try {
             byte[] inputBytes = fr.readComp(originalFile);
 
             Map<String,Integer> map= cTree.getFrequencyMap(inputBytes);
-
-            map = getBestMap(map);
 
             Node tree=cTree.generateTree(map);
             Map<String,String> hash= cTree.getHashTable(tree);
