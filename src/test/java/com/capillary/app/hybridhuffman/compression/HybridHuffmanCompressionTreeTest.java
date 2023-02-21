@@ -44,9 +44,9 @@ public class HybridHuffmanCompressionTreeTest {
         Map<String, Integer> expected = new HashMap<>();
         expected.put("ab", 2);
         expected.put(" ", 2);
-        expected.put("a", 1);
-        expected.put("b", 1);
-        expected.put("c", 1);
+        expected.put("abc", 1);
+//        expected.put("b", 1);
+//        expected.put("c", 1);
 
         Map<String, Integer> result = cTree.getFrequencyMap(arr);
         assertEquals(expected, result);

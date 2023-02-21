@@ -23,6 +23,8 @@ public class Main{
     public static void main(String[] args) {
         Scanner s= new Scanner(System.in);
 
+        Runtime runtime = Runtime.getRuntime();
+
 //        System.out.print("Enter Filename to be compressed : ");
 //        String filename=s.nextLine();
         String filename=args[0];
@@ -79,5 +81,7 @@ public class Main{
             CompressionStats st=new CompressionStats();
             st.getStats(filename,compressed,decompressed,compressionTime,decompressionTime);
         }
+
+        System.out.println("Total memory Used : " + ((runtime.totalMemory() - runtime.freeMemory()) / (1024 * 1024)) + "MB");
     }
 }

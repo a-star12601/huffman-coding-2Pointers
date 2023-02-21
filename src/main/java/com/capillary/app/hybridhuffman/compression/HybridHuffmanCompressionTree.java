@@ -4,6 +4,9 @@ import com.capillary.app.general.Node;
 import com.capillary.app.general.NodeComparator;
 import com.capillary.app.zipper.compression.ICompressionTree;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.*;
@@ -59,27 +62,27 @@ public class HybridHuffmanCompressionTree implements ICompressionTree<String> {
             sortedMap.put(l.getKey(), l.getValue());
         }
 
-        Map<String, Integer> mp = new LinkedHashMap<>();
-
-        int limit = (int) Math.ceil(sortedMap.size() * 0.2);
-        int i=0;
-        for (Map.Entry<String, Integer> m : sortedMap.entrySet()){
-            if(i<limit){
-                mp.put(m.getKey(), m.getValue());
-                i++;
-            }else{
-                String k = m.getKey();
-                if(k.length() > 1){
-                    for(char c : k.toCharArray()){
-                        mp.put(c+"", mp.getOrDefault(c+"", 0)+m.getValue());
-                    }
-                }else{
-                    mp.put(k, mp.getOrDefault(k, 0)+m.getValue());
-                }
-            }
-        }
+//        Map<String, Integer> mp = new LinkedHashMap<>();
+//
+//        int limit = (int) Math.ceil(sortedMap.size() * 0.2);
+//        int i=0;
+//        for (Map.Entry<String, Integer> m : sortedMap.entrySet()){
+//            if(i<limit){
+//                mp.put(m.getKey(), m.getValue());
+//                i++;
+//            }else{
+//                String k = m.getKey();
+//                if(k.length() > 1){
+//                    for(char c : k.toCharArray()){
+//                        mp.put(c+"", mp.getOrDefault(c+"", 0)+m.getValue());
+//                    }
+//                }else{
+//                    mp.put(k, mp.getOrDefault(k, 0)+m.getValue());
+//                }
+//            }
+//        }
 //        System.out.println(mp.size());
-        return mp;
+        return sortedMap;
     }
 
     @Override

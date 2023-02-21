@@ -52,7 +52,7 @@ public class ScaledHuffmanZipperUnzipper implements IZipperUnzipper {
             Map<String,String> hash= cTree.getHashTable(tree);
 
             double average=WAvg(map,hash);
-            System.out.println("Average LPC : "+average);
+            System.out.println("Average Bits per char : "+average);
 
             List<Byte> encodedList = comp.getCompressedBytes(inputBytes,hash);
             byte[] encodedBytes = comp.byteFromByteList(encodedList);
@@ -68,7 +68,6 @@ public class ScaledHuffmanZipperUnzipper implements IZipperUnzipper {
             ComplexReturnType crt = fr.readDecomp(compressedFile);
             Map<String, Integer> map = crt.getMap();
             byte[] compressBytes = crt.getByteArray();
-
 
 
             Node tree=dTree.regenerateTree(map);

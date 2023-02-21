@@ -52,7 +52,7 @@ public class NativeHuffmanZipperUnzipper implements IZipperUnzipper {
             Map<Character,String> hash= cTree.getHashTable(tree);
 
             double average=WAvg(map,hash);
-            System.out.println("Average LPC : "+average);
+            System.out.println("Average Bits per char : "+average);
 
             List<Byte> encodedList = comp.getCompressedBytes(inputBytes,hash);
             byte[] encodedBytes = comp.byteFromByteList(encodedList);
