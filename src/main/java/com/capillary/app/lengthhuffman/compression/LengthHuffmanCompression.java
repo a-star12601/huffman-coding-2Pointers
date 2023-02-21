@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.List;
 
 /**
- * Class for root.general Tree-Based Encoders.
+ * Class for Performing Word-Character-based Encoding considering Length.
  */
 public class LengthHuffmanCompression implements ICompression<String> {
     private static boolean isLetterOrDigit(char c) {

@@ -10,13 +10,13 @@ import com.capillary.app.zipper.IZipperUnzipper;
 import java.util.Scanner;
 
 /**
- * root.Main class.
+ * Main class.
  */
 public class Main{
 
 
     /**
-     * root.Main method
+     * Main method
      *
      * @param args the input arguments
      */

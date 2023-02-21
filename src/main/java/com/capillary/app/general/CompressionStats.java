@@ -5,9 +5,22 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
+/**
+ * Class for handling the stats related to compression.
+ */
 public class CompressionStats {
+    /**
+     * Logger object.
+     */
     Logger logger = Logger.getLogger(CompressionStats.class.getName());
 
+    /**
+     * Compare files and check whether they are equal or not.
+     *
+     * @param file1 the file 1
+     * @param file2 the file 2
+     * @return true if files match, else false
+     */
     public boolean compareFiles(String file1, String file2){
         FileRead f=new FileRead();
         try {
@@ -24,6 +37,15 @@ public class CompressionStats {
         }
     }
 
+    /**
+     * Funtion to log out stats related to compression.
+     *
+     * @param originalFile      the original file
+     * @param compressedFile    the compressed file
+     * @param decompressedFile  the decompressed file
+     * @param compressionTime   the compression time
+     * @param decompressionTime the decompression time
+     */
     public void getStats(String originalFile,String compressedFile, String decompressedFile,long compressionTime,long decompressionTime){
         boolean isEqual = compareFiles(originalFile, decompressedFile);
 

@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.PriorityQueue;
 
 /**
- * Class for performing Huffman decoding.
+ * Class for generating Word-based Huffman Tree for decoding.
  */
 public class ScaledHuffmanDecompressionTree implements IDecompressionTree<String> {
 

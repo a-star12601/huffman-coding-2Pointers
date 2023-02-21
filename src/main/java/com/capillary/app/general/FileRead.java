@@ -3,7 +3,19 @@ package com.capillary.app.general;
 import java.io.*;
 import java.util.Map;
 
+/**
+ * Class for handling File read operations.
+ *
+ * @param <T> the Generic type
+ */
 public class FileRead<T> {
+    /**
+     * Function to read input file on the compression side.
+     *
+     * @param filename the filename
+     * @return the byte array containing input file bytes
+     * @throws IOException the io exception
+     */
     public byte[] readComp(String filename) throws IOException{
         File file = new File(filename);
         FileInputStream input = null;
@@ -15,7 +27,13 @@ public class FileRead<T> {
         return arr;
     }
 
-    public ComplexReturnType readDecomp(String path) {
+    /**
+     * Function to read input file on the decompression side.
+     *
+     * @param path the file path
+     * @return Class with Map and compressed file bytes
+     */
+    public ComplexReturnType<T> readDecomp(String path) {
         try{
             FileInputStream fin = new FileInputStream(path);
             ObjectInputStream in = new ObjectInputStream(fin);
@@ -26,7 +44,7 @@ public class FileRead<T> {
             in.close();
             fin.close();
 
-            ComplexReturnType crt = new ComplexReturnType(map, compressBytes);
+            ComplexReturnType<T> crt = new ComplexReturnType(map, compressBytes);
             return crt;
         }catch (Exception e){
             throw new RuntimeException(e);

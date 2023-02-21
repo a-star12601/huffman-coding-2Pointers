@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Zipper Class to combine encoding and decoding.
+ */
 public class NativeHuffmanZipperUnzipper implements IZipperUnzipper {
     private FileRead fr;
     private ICompressionTree cTree;
@@ -24,6 +27,9 @@ public class NativeHuffmanZipperUnzipper implements IZipperUnzipper {
     private IDecompression decomp;
 
 
+    /**
+     * Constructor for zipper initialisation.
+     */
     public NativeHuffmanZipperUnzipper(){
         fr = new FileRead<Character>();
         cTree = new NativeHuffmanCompressionTree();
@@ -33,6 +39,16 @@ public class NativeHuffmanZipperUnzipper implements IZipperUnzipper {
         decomp = new NativeHuffmanDecompression();
     }
 
+    /**
+     * Constructor for zipper testing.
+     *
+     * @param fr     the fileread object
+     * @param cTree  the compressionTree object
+     * @param comp   the compression object
+     * @param fw     the filewrite object
+     * @param dTree  the decompressionTree object
+     * @param decomp the decompression object
+     */
     public NativeHuffmanZipperUnzipper(FileRead fr, ICompressionTree cTree, ICompression comp,
                                        FileWrite fw, IDecompressionTree dTree, IDecompression decomp){
         this.fr = fr;
@@ -79,6 +95,13 @@ public class NativeHuffmanZipperUnzipper implements IZipperUnzipper {
         }
     }
 
+    /**
+     * Function to return Symbols/Character.
+     *
+     * @param map  the frequencymap
+     * @param hash the hashmap
+     * @return symbols/character
+     */
     double WAvg(Map<Character,Integer> map,Map<Character,String> hash){
         double sum=0;
         double chars=0;

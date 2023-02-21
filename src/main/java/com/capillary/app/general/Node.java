@@ -1,12 +1,15 @@
 package com.capillary.app.general;
 
+/**
+ * Type Node to store tree contents.
+ */
 public class Node {
     /**
-     * Character in the node.
+     * Value of Character/String.
      */
     public String value;
     /**
-     * frequency of the node.
+     * frequency of the character/string.
      */
     public int freq;
     /**
@@ -17,6 +20,7 @@ public class Node {
      * right link.
      */
     public Node rightNode;
+
     /**
      * Constructor for empty node.
      */
@@ -43,10 +47,8 @@ public class Node {
     /**
      * Constructor for an intermediate node.
      *
-     * @param f     the frequency
      * @param left  the left link
      * @param right the right link
-     * @param h     the height
      */
     public Node(Node left,Node right){
         freq = left.freq + right.freq;

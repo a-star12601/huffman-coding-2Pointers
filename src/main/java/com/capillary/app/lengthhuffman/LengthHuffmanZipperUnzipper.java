@@ -19,15 +19,39 @@ import java.util.List;
 import java.util.Map;
 
 
+/**
+ * Zipper Class to combine encoding and decoding.
+ */
 public class LengthHuffmanZipperUnzipper implements IZipperUnzipper {
+    /**
+     * The FileRead object.
+     */
     FileRead fr;
+    /**
+    * The CompressionTree object.
+     */
     ICompressionTree cTree;
+    /**
+     * The Compression object.
+     */
     ICompression comp;
+    /**
+     * The FileWrite object.
+     */
     FileWrite fw;
+    /**
+     * The DecompressionTree object.
+     */
     IDecompressionTree dTree;
+    /**
+     * The Decompression object.
+     */
     IDecompression decomp;
 
 
+    /**
+     * Constructor for zipper initialisation.
+     */
     public LengthHuffmanZipperUnzipper(){
         fr = new FileRead<String>();
         cTree = new LengthHuffmanCompressionTree();
@@ -37,6 +61,16 @@ public class LengthHuffmanZipperUnzipper implements IZipperUnzipper {
         decomp = new LengthHuffmanDecompression();
     }
 
+    /**
+     * Constructor for zipper testing.
+     *
+     * @param fr     the fileread object
+     * @param cTree  the compressionTree object
+     * @param comp   the compression object
+     * @param fw     the filewrite object
+     * @param dTree  the decompressionTree object
+     * @param decomp the decompression object
+     */
     public LengthHuffmanZipperUnzipper(FileRead fr, ICompressionTree cTree, ICompression comp,
                                        FileWrite fw, IDecompressionTree dTree, IDecompression decomp){
         this.fr = fr;
@@ -85,6 +119,13 @@ public class LengthHuffmanZipperUnzipper implements IZipperUnzipper {
         }
     }
 
+    /**
+     * Function to return Symbols/Character.
+     *
+     * @param map  the frequencymap
+     * @param hash the hashmap
+     * @return symbols/character
+     */
     double WAvg(Map<String,Integer> map,Map<String,String> hash){
         double sum=0;
         double chars=0;

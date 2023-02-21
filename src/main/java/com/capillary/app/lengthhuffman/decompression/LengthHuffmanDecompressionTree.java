@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.PriorityQueue;
 
 /**
- * Class for performing Huffman decoding.
+ * Class for generating Word-Character-based Huffman tree for Decoding considering Length.
  */
 public class LengthHuffmanDecompressionTree implements IDecompressionTree<String> {
 

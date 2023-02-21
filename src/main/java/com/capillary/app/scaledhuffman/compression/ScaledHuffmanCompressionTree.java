@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 /**
- * Class for performing Huffman Encoding.
+ * Class for generating Word-based Huffman Tree for encoding.
  */
 public class ScaledHuffmanCompressionTree implements ICompressionTree<String> {
 

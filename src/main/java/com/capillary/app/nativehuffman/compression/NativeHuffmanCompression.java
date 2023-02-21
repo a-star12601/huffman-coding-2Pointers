@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Class for root.general Tree-Based Encoders.
+ * Class for Performing Character-based Encoding.
  */
 public class NativeHuffmanCompression implements ICompression<Character> {
 

@@ -6,7 +6,7 @@ import com.capillary.app.zipper.decompression.IDecompression;
 import java.util.Map;
 
 /**
- * Class for root.general Tree-Based Decoders.
+ * Class for Performing Word-Character-based Decoding considering Length.
  */
 public class LengthHuffmanDecompression implements IDecompression<String> {
 

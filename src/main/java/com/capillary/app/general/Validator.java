@@ -2,6 +2,9 @@ package com.capillary.app.general;
 
 import java.io.File;
 
+/**
+ * Class to perform validation operations.
+ */
 public class Validator {
     private boolean checkFileNotEmpty(String filename){
         File f=new File(filename);
@@ -17,6 +20,14 @@ public class Validator {
         return filename.matches("[a-zA-Z0-9-._ ]+\\.[a-z]+");
     }
 
+    /**
+     * Validate the files based on their names, presence and coontents.
+     *
+     * @param original     the original file
+     * @param compressed   the compressed file
+     * @param decompressed the decompressed file
+     * @return the boolean
+     */
     public boolean validate(String original,String compressed,String decompressed){
         if(checkValidFileName(original) && checkFileExists(original)&&checkFileNotEmpty(original)){
             if(checkValidFileName(compressed) && checkValidFileName(decompressed)){
