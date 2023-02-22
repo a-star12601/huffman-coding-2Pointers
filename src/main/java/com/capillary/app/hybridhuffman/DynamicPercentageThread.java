@@ -6,7 +6,7 @@ import com.capillary.app.hybridhuffman.compression.HybridHuffmanCompressionTree;
 import java.io.IOException;
 import java.util.Map;
 
-public class DynamicPercentageThread extends Thread{
+public class DynamicPercentageThread implements Runnable{
     int x,y;
     Map<String ,Integer> map;
     DynamicPercentageThread(int a, int b, Map<String ,Integer> mp){

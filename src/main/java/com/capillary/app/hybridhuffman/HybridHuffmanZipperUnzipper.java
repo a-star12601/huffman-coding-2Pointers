@@ -17,6 +17,7 @@ import com.capillary.app.zipper.decompression.IDecompressionTree;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -129,29 +130,30 @@ public class HybridHuffmanZipperUnzipper implements IZipperUnzipper {
     }
 
     private Map<String,Integer> getBestMap(Map<String,Integer> mp) throws IOException, InterruptedException {
-        DynamicPercentageThread obj1=new DynamicPercentageThread(0,25,mp);
-        DynamicPercentageThread obj2=new DynamicPercentageThread(26,50,mp);
-        DynamicPercentageThread obj3=new DynamicPercentageThread(51,75,mp);
-        DynamicPercentageThread obj4=new DynamicPercentageThread(76,100,mp);
+        DynamicPercentageThread[] tasksArray=new DynamicPercentageThread[10];
+        Thread[] t=new Thread[10];
+        for(int i=0;i<10;i++){
+            tasksArray[i]=new DynamicPercentageThread(i*10,i*10+10,mp);
+            t[i]=new Thread(tasksArray[i]);
+            t[i].start();
+        }
+        for(int i=0;i<10;i++){
+            t[i].join();
+        }
+        long bestSize=Integer.MAX_VALUE;
+        int bestPercentage=-1;
+        Map<String ,Integer> bestMap=null;
 
-        Thread t1=new Thread(obj1);
-        Thread t2=new Thread(obj2);
-        Thread t3=new Thread(obj3);
-        Thread t4=new Thread(obj4);
+        for(int i=0;i<10;i++){
+            if(tasksArray[i].bestSize<bestSize){
+                bestSize=tasksArray[i].bestSize;
+                bestPercentage=tasksArray[i].bestPercent;
+                bestMap=tasksArray[i].bestMap;
+            }
+        }
 
-        t1.start();t2.start();t3.start();t4.start();
-        t1.join();t2.join();t3.join();t4.join();
-
-        System.out.println(obj1.bestPercent+" "+ obj2.bestPercent);
-        System.out.println(obj3.bestPercent+" "+ obj4.bestPercent);
-
-        DynamicPercentageThread minimum1=obj1.bestSize<obj2.bestSize?obj1:obj2;
-        DynamicPercentageThread minimum2=obj3.bestSize<obj4.bestSize?obj3:obj4;
-
-        System.out.println("\n"+minimum1.bestPercent+" "+minimum2.bestPercent);
-
-        return minimum1.bestSize<minimum2.bestSize?minimum1.bestMap:minimum2.bestMap;
-
+        System.out.println(bestPercentage+" "+bestSize);
+        return bestMap;
 
 //        for(int i=0; i<=100; i=i+1){
 //
