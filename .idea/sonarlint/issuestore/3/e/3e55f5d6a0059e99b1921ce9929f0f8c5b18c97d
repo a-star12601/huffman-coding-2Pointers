@@ -1,0 +1,12 @@
+
+`	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(áþßÔüÿÿÿÿ
+`	java:S1124"FDefine and throw a dedicated exception instead of using a generic one.(¡¢§þþÿÿÿÿ
+`	java:S112Z"FDefine and throw a dedicated exception instead of using a generic one.(˜ÑÞ¡þÿÿÿÿ
+7
+java:S1643!"Use a StringBuilder instead.(Ý¡˜éúÿÿÿÿ
+Q
+java:S4973$"<Strings and Boxed types should be compared using "equals()".(¶‡ÌY
+Q
+java:S4973+"<Strings and Boxed types should be compared using "equals()".(¶‡ÌY
+[
+java:S18589"@"getKey" returns a string, there's no need to call "toString()".(úŒÎîûÿÿÿÿ

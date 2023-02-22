@@ -1,0 +1,10 @@
+
+g
+java:S1104
+"QMake value a static final constant or non-public and provide accessors if needed.(çªÆà
+k
+java:S1104"PMake freq a static final constant or non-public and provide accessors if needed.(Þº·ˆýÿÿÿÿ
+o
+java:S1104"TMake leftNode a static final constant or non-public and provide accessors if needed.(¨Ø÷Ãúÿÿÿÿ
+k
+java:S1104"UMake rightNode a static final constant or non-public and provide accessors if needed.(°õ‡»

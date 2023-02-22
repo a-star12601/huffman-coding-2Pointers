@@ -1,0 +1,10 @@
+
+`	java:S1122"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+L
+java:S3740/"/Provide the parametrized type for this generic.(ÁÑÒÄ8Åá’ç0
+q
+java:S1488/"[Immediately return this expression instead of assigning it to the temporary variable "crt".(ÁÑÒÄ
+c
+java:S2095"MUse try-with-resources or close this "FileInputStream" in a "finally" clause.(Ä©Òı
+e
+java:S2674"JCheck the return value of the "read" call to see how many bytes were read.(£ïüÿÿÿÿ

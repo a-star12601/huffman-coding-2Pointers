@@ -1,0 +1,15 @@
+
+`	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(¯òÀÖıÿÿÿÿ
+[	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(šŞ»¥
+7
+java:S1643$"Use a StringBuilder instead.(İ¡˜éúÿÿÿÿ
+7
+java:S1643("Use a StringBuilder instead.(ß¹×şüÿÿÿÿ
+2
+java:S1643+"Use a StringBuilder instead.(í”¶Ş
+Q
+java:S4973'"<Strings and Boxed types should be compared using "equals()".(¶‡ÌY
+Q
+java:S49736"<Strings and Boxed types should be compared using "equals()".(¶‡ÌY
+h
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(Ù¦ä×

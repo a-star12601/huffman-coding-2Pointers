@@ -1,0 +1,33 @@
+
+`	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(áþßÔüÿÿÿÿ
+`	java:S112k"FDefine and throw a dedicated exception instead of using a generic one.(¡¢§þþÿÿÿÿ
+a	java:S112‘"FDefine and throw a dedicated exception instead of using a generic one.(˜ÑÞ¡þÿÿÿÿ
+7
+java:S1643'"Use a StringBuilder instead.(Ý¡˜éúÿÿÿÿ
+Q
+java:S4973*"<Strings and Boxed types should be compared using "equals()".(¶‡ÌY
+Q
+java:S49731"<Strings and Boxed types should be compared using "equals()".(¶‡ÌY
+W
+java:S49739"<Strings and Boxed types should be compared using "equals()".(‰Ðëóÿÿÿÿÿ
+X
+java:S2184F"BCast one of the operands of this division operation to a "double".(´ä¼»
+V
+java:S2184F"@Cast one of the operands of this integer division to a "double".(´ä¼»
+]
+java:S2184G"BCast one of the operands of this division operation to a "double".(œ‹‡“ÿÿÿÿÿ
+[
+java:S2184G"@Cast one of the operands of this integer division to a "double".(œ‹‡“ÿÿÿÿÿ
+U
+java:S3518G":Make sure "freq" can't be zero before doing this division.(œ‹‡“ÿÿÿÿÿ
+h
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.(©Í¥ò
+?
+java:S1659"$Declare "count2" on a separate line.(ÀÝŽ¢ùÿÿÿÿ
+=
+java:S1659""Declare "avg2" on a separate line.(Ç”Ü€üÿÿÿÿ
+S	java:S106I"9Replace this use of System.out or System.err by a logger.(”®‹úøÿÿÿÿ
+M	java:S106J"9Replace this use of System.out or System.err by a logger.(¸ú <
+P	java:S125d"<This block of commented-out lines of code should be removed.(ïÐð
+[
+java:S1858p"@"getKey" returns a string, there's no need to call "toString()".(úŒÎîûÿÿÿÿ

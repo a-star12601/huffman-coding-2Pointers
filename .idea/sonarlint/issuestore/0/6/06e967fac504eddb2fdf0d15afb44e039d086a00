@@ -1,0 +1,7 @@
+
+Y
+java:S3034$">Prevent "int" promotion by adding "& 0xff" to this expression.(¦Á¹™øÿÿÿÿ
+[
+java:S1858"@"getKey" returns a string, there's no need to call "toString()".(‘á£ðýÿÿÿÿ
+h
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(à¬ˆŸ

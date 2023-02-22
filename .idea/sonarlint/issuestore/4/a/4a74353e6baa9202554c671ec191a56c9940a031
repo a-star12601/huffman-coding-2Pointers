@@ -1,0 +1,33 @@
+
+`	java:S112N"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+`	java:S112^"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+E
+java:S3740"/Provide the parametrized type for this generic.(¸ÂèÆ
+E
+java:S3740"/Provide the parametrized type for this generic.(ôËƒ¨
+J
+java:S3740"/Provide the parametrized type for this generic.(Šûççøÿÿÿÿ
+E
+java:S3740"/Provide the parametrized type for this generic.(ý®ò…
+E
+java:S3740"/Provide the parametrized type for this generic.(‚·îœ
+E
+java:S3740"/Provide the parametrized type for this generic.(ÙŒäñ
+J
+java:S37404"/Provide the parametrized type for this generic.(Ï½‹§úÿÿÿÿ
+J
+java:S37404"/Provide the parametrized type for this generic.(Ï½‹§úÿÿÿÿ
+J
+java:S37404"/Provide the parametrized type for this generic.(Ï½‹§úÿÿÿÿ
+J
+java:S37405"/Provide the parametrized type for this generic.(Í§‰žûÿÿÿÿ
+J
+java:S37405"/Provide the parametrized type for this generic.(Í§‰žûÿÿÿÿ
+J
+java:S37405"/Provide the parametrized type for this generic.(Í§‰žûÿÿÿÿ
+J
+java:S3740T"/Provide the parametrized type for this generic.(üÌ”Åùÿÿÿÿ
+Q
+java:S3518p";Make sure "chars" can't be zero before doing this division.(©˜ª—
+N	java:S106G"9Replace this use of System.out or System.err by a logger.(ÞŠ˜Â
+c	java:S100i"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(óÒü•
