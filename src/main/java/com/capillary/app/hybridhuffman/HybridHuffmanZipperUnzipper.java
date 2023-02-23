@@ -21,6 +21,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 /**
@@ -130,29 +132,53 @@ public class HybridHuffmanZipperUnzipper implements IZipperUnzipper {
     }
 
     private Map<String,Integer> getBestMap(Map<String,Integer> mp) throws IOException, InterruptedException {
-        DynamicPercentageThread[] tasksArray=new DynamicPercentageThread[10];
-        Thread[] t=new Thread[10];
-        for(int i=0;i<10;i++){
-            tasksArray[i]=new DynamicPercentageThread(i*10,i*10+10,mp);
-            t[i]=new Thread(tasksArray[i]);
-            t[i].start();
-        }
-        for(int i=0;i<10;i++){
-            t[i].join();
-        }
+//        DynamicPercentageThread[] tasksArray=new DynamicPercentageThread[10];
+//        Thread[] t=new Thread[10];
+//        for(int i=0;i<10;i++){
+//            tasksArray[i]=new DynamicPercentageThread(i*10,i*10+10,mp);
+//            t[i]=new Thread(tasksArray[i]);
+//            t[i].start();
+//        }
+//        for(int i=0;i<10;i++){
+//            t[i].join();
+//        }
+//        long bestSize=Integer.MAX_VALUE;
+//        int bestPercentage=-1;
+//        Map<String ,Integer> bestMap=null;
+//
+//        for(int i=0;i<10;i++){
+//            if(tasksArray[i].bestSize<bestSize){
+//                bestSize=tasksArray[i].bestSize;
+//                bestPercentage=tasksArray[i].bestPercent;
+//                bestMap=tasksArray[i].bestMap;
+//            }
+//        }
+
+//        System.out.println(bestPercentage+" "+bestSize);
+        
+        
+        PercentageTask[] obj100=new PercentageTask[101];
+        List<Integer> looper = IntStream.rangeClosed(0, 100).boxed().collect(Collectors.toList());
+        looper.parallelStream().forEach((i) -> {
+            obj100[i]=new PercentageTask();
+            try {
+                obj100[i].getVals(mp,i);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
         long bestSize=Integer.MAX_VALUE;
         int bestPercentage=-1;
         Map<String ,Integer> bestMap=null;
-
-        for(int i=0;i<10;i++){
-            if(tasksArray[i].bestSize<bestSize){
-                bestSize=tasksArray[i].bestSize;
-                bestPercentage=tasksArray[i].bestPercent;
-                bestMap=tasksArray[i].bestMap;
+        for(int i=0;i<=100;i++){
+            if(obj100[i].totalSize<bestSize){
+                bestSize=obj100[i].totalSize;
+                bestPercentage=i;
+                bestMap=obj100[i].tempMap;
             }
         }
+        System.out.println(bestPercentage);
 
-        System.out.println(bestPercentage+" "+bestSize);
         return bestMap;
 
 //        for(int i=0; i<=100; i=i+1){
