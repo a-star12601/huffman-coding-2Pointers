@@ -14,13 +14,13 @@ import com.capillary.app.zipper.compression.ICompressionTree;
 import com.capillary.app.zipper.decompression.IDecompression;
 import com.capillary.app.zipper.decompression.IDecompressionTree;
 
+import java.awt.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -132,7 +132,37 @@ public class HybridHuffmanZipperUnzipper implements IZipperUnzipper {
     }
 
     private Map<String,Integer> getBestMap(Map<String,Integer> mp) throws IOException, InterruptedException {
-//        DynamicPercentageThread[] tasksArray=new DynamicPercentageThread[10];
+        ExecutorService service = Executors.newCachedThreadPool();
+        Task[] tasks = new Task[4];
+        List<Future<Integer>> futureList = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            tasks[i] = new Task(mp, i);
+            futureList.add(service.submit(tasks[i]));
+        }
+
+        long bestSize = Integer.MAX_VALUE;
+        int bestPercentage=-1;
+        Map<String ,Integer> bestMap=null;
+
+        for (int i = 0; i < 4; i++){
+            try {
+                int size = futureList.get(i).get();
+                if(size<bestSize){
+                    bestSize=size;
+                    bestPercentage=tasks[i].bestPercent;
+                    bestMap=tasks[i].bestMap;
+                }
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        service.shutdownNow();
+
+        System.out.println(bestPercentage+" "+bestSize);
+
+        return bestMap;
+
+        //        DynamicPercentageThread[] tasksArray=new DynamicPercentageThread[10];
 //        Thread[] t=new Thread[10];
 //        for(int i=0;i<10;i++){
 //            tasksArray[i]=new DynamicPercentageThread(i*10,i*10+10,mp);
@@ -155,8 +185,9 @@ public class HybridHuffmanZipperUnzipper implements IZipperUnzipper {
 //        }
 
 //        System.out.println(bestPercentage+" "+bestSize);
-        
-        
+
+        /*
+
         PercentageTask[] obj100=new PercentageTask[101];
         List<Integer> looper = IntStream.rangeClosed(0, 100).boxed().collect(Collectors.toList());
         looper.parallelStream().forEach((i) -> {
@@ -180,6 +211,9 @@ public class HybridHuffmanZipperUnzipper implements IZipperUnzipper {
         System.out.println(bestPercentage);
 
         return bestMap;
+
+
+         */
 
 //        for(int i=0; i<=100; i=i+1){
 //

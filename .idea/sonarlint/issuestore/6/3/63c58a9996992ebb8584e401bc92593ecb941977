@@ -1,21 +1,0 @@
-
-g	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(áşßÔüÿÿÿÿ8‘·™ç0
-g	java:S112["FDefine and throw a dedicated exception instead of using a generic one.(¡¢§şşÿÿÿÿ8‘·™ç0
-h	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(˜ÑŞ¡şÿÿÿÿ8ã½™ç0
->
-java:S1643%"Use a StringBuilder instead.(İ¡˜éúÿÿÿÿ8ä½™ç0
-X
-java:S4973("<Strings and Boxed types should be compared using "equals()".(¶‡ÌY8å½™ç0
-X
-java:S4973/"<Strings and Boxed types should be compared using "equals()".(¶‡ÌY8æ½™ç0
-^
-java:S49737"<Strings and Boxed types should be compared using "equals()".(‰Ğëóÿÿÿÿÿ8ç½™ç0
-]	java:S125A"<This block of commented-out lines of code should be removed.(ïª‡şùÿÿÿÿ8ä½™ç0
-[
-java:S1858`"@"getKey" returns a string, there's no need to call "toString()".(úŒÎîûÿÿÿÿ
-V
-java:S1128":Remove this unused import 'java.io.ByteArrayOutputStream'.(Î‡È8ì½™ç0
-R
-java:S1128"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8ì½™ç0
-Y
-java:S1128	"7Remove this unused import 'java.io.ObjectOutputStream'.(é»Óºûÿÿÿÿ8ì½™ç0

@@ -63,9 +63,9 @@ public class CompressionStats {
             logger.info("\n********** Operation Successful **********\n"+
                     "\nCompress Time : " + compressionTime + " ms"+
                     "\nDecompress Time : " + decompressionTime + " ms"+
-                    "\nOriginal File Size : " + (float) ofl + " Bytes"+
-                    "\nCompressed File Size : " + (float) cfl + " Bytes"+
-                    "\nDecompressed File Size : " + (float) dfl + " Bytes"+
+                    "\nOriginal File Size : " + (float) ofl / (1024* 1024)+ " MB"+
+                    "\nCompressed File Size : " + (float) cfl / (1024* 1024) + " MB"+
+                    "\nDecompressed File Size : " + (float) dfl / (1024* 1024) + " MB"+
                     "\nCompression Ratio : " + ((float)(ofl-cfl)/ofl)*100 + " %");
         }else {
             logger.info("\n********** Operation Failed **********\n");

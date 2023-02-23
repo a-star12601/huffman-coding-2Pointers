@@ -1,12 +1,0 @@
-
-`	java:S112$"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
-E
-java:S3740"/Provide the parametrized type for this generic.(ÙÍ™
-E
-java:S3740"/Provide the parametrized type for this generic.(ÙÍ™
-b
-java:S1192B"GDefine a constant instead of duplicating this literal " Bytes" 3 times.(…­ïÌøÿÿÿÿ
-R
-java:S2629?"7Use the built-in formatting to construct this argument.(à¨§±ùÿÿÿÿ
-W
-java:S1126"AReplace this if-then-else statement by a single return statement.(ƒÒü²
