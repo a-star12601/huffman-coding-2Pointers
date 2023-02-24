@@ -31,9 +31,17 @@ public class Task implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        for (int i=r*25; i<=(r+1)*25; i++){
-            generateMap(i);
+        int start = r*25;
+        int end = (r+1)*25;
+
+        for (int i=0; i<=5; i++){
+            int per = (int) (Math.random()*(end-start+1)+start);
+            generateMap(per);
         }
+
+//        for (int i=r*25; i<=(r+1)*25; i=i+5){
+//            generateMap(i);
+//        }
         return Math.toIntExact(bestSize);
     }
 
