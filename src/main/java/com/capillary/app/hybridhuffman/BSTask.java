@@ -1,15 +1,6 @@
 package com.capillary.app.hybridhuffman;
 
-import com.capillary.app.general.Node;
-import com.capillary.app.general.NodeComparator;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.PriorityQueue;
 import java.util.concurrent.Callable;
 
 public class BSTask implements Callable<Integer> {
@@ -36,7 +27,8 @@ public class BSTask implements Callable<Integer> {
     private Integer findLM(Integer[] obj,int start,int end){
         int mid=start+(end-start)/2;
         int size=obj.length;
-        if(obj[mid]==0){
+
+        if(obj[mid]==Integer.MAX_VALUE){
             ob.generateMap(mid+25*r);
             obj[mid]= Math.toIntExact(ob.totalSize);
         }

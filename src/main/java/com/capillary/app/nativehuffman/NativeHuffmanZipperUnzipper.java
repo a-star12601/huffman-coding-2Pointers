@@ -1,15 +1,18 @@
 package com.capillary.app.nativehuffman;
 
-import com.capillary.app.general.*;
+import com.capillary.app.general.ComplexReturnType;
+import com.capillary.app.general.FileRead;
+import com.capillary.app.general.FileWrite;
+import com.capillary.app.general.Node;
 import com.capillary.app.nativehuffman.compression.NativeHuffmanCompression;
 import com.capillary.app.nativehuffman.compression.NativeHuffmanCompressionTree;
 import com.capillary.app.nativehuffman.decompression.NativeHuffmanDecompression;
 import com.capillary.app.nativehuffman.decompression.NativeHuffmanDecompressionTree;
+import com.capillary.app.zipper.IZipperUnzipper;
 import com.capillary.app.zipper.compression.ICompression;
 import com.capillary.app.zipper.compression.ICompressionTree;
 import com.capillary.app.zipper.decompression.IDecompression;
 import com.capillary.app.zipper.decompression.IDecompressionTree;
-import com.capillary.app.zipper.IZipperUnzipper;
 
 import java.io.IOException;
 import java.util.List;

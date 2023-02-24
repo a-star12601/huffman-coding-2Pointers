@@ -1,3 +1,4 @@
+/home/dhanish/development/huffman-coding-2Pointers/src/test/java/com/capillary/app/lengthhuffman/compression/LengthHuffmanCompressionTreeTest.java
 /home/dhanish/development/huffman-coding-2Pointers/src/test/java/com/capillary/app/hybridhuffman/decompression/HybridHuffmanDecompressionTreeTest.java
 /home/dhanish/development/huffman-coding-2Pointers/src/test/java/com/capillary/app/MainTest.java
 /home/dhanish/development/huffman-coding-2Pointers/src/test/java/com/capillary/app/nativehuffman/NativeHuffmanZipperUnzipperTest.java
@@ -6,11 +7,15 @@
 /home/dhanish/development/huffman-coding-2Pointers/src/test/java/com/capillary/app/scaledhuffman/compression/ScaledHuffmanCompressionTreeTest.java
 /home/dhanish/development/huffman-coding-2Pointers/src/test/java/com/capillary/app/hybridhuffman/compression/HybridHuffmanCompressionTest.java
 /home/dhanish/development/huffman-coding-2Pointers/src/test/java/com/capillary/app/general/CompressionStatsTest.java
+/home/dhanish/development/huffman-coding-2Pointers/src/test/java/com/capillary/app/lengthhuffman/LengthHuffmanZipperUnzipperTest.java
 /home/dhanish/development/huffman-coding-2Pointers/src/test/java/com/capillary/app/scaledhuffman/decompression/ScaledHuffmanDecompressionTest.java
+/home/dhanish/development/huffman-coding-2Pointers/src/test/java/com/capillary/app/lengthhuffman/decompression/LengthHuffmanDecompressionTreeTest.java
 /home/dhanish/development/huffman-coding-2Pointers/src/test/java/com/capillary/app/hybridhuffman/compression/HybridHuffmanCompressionTreeTest.java
 /home/dhanish/development/huffman-coding-2Pointers/src/test/java/com/capillary/app/general/NodeComparatorTest.java
+/home/dhanish/development/huffman-coding-2Pointers/src/test/java/com/capillary/app/lengthhuffman/compression/LengthHuffmanCompressionTest.java
 /home/dhanish/development/huffman-coding-2Pointers/src/test/java/com/capillary/app/hybridhuffman/HybridHuffmanZipperUnzipperTest.java
 /home/dhanish/development/huffman-coding-2Pointers/src/test/java/com/capillary/app/nativehuffman/compression/NativeHuffmanCompressionTest.java
+/home/dhanish/development/huffman-coding-2Pointers/src/test/java/com/capillary/app/lengthhuffman/decompression/LengthHuffmanDecompressionTest.java
 /home/dhanish/development/huffman-coding-2Pointers/src/test/java/com/capillary/app/hybridhuffman/decompression/HybridHuffmanDecompressionTest.java
 /home/dhanish/development/huffman-coding-2Pointers/src/test/java/com/capillary/app/scaledhuffman/ScaledHuffmanZipperUnzipperTest.java
 /home/dhanish/development/huffman-coding-2Pointers/src/test/java/com/capillary/app/nativehuffman/decompression/NativeHuffmanDecompressionTest.java

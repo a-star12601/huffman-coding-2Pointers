@@ -14,15 +14,17 @@ import com.capillary.app.zipper.compression.ICompressionTree;
 import com.capillary.app.zipper.decompression.IDecompression;
 import com.capillary.app.zipper.decompression.IDecompressionTree;
 
-import java.awt.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.concurrent.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 
 /**
@@ -87,26 +89,6 @@ public class HybridHuffmanZipperUnzipper implements IZipperUnzipper {
         this.decomp = decomp;
     }
 
-    public long getFileSize(Map<String,Integer> map,Map<String,String> hash){
-        long sum=0;
-        for(Map.Entry<String,Integer> m: map.entrySet()){
-            sum+=m.getValue()*hash.get(m.getKey()).length();
-        }
-        return (long) Math.ceil(sum/8);
-    }
-
-    public int getMapSize(Map<String, Integer> mp) throws IOException {
-
-        ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteOutputStream);
-
-        objectOutputStream.writeObject(mp);
-        objectOutputStream.flush();
-        objectOutputStream.close();
-
-        return byteOutputStream.toByteArray().length;
-    }
-
     public Map<String, Integer> generateDynamicMap(Map<String, Integer> sortedMap, int percentage){
         Map<String, Integer> mp = new LinkedHashMap<>();
 
@@ -127,11 +109,10 @@ public class HybridHuffmanZipperUnzipper implements IZipperUnzipper {
                 }
             }
         }
-//        System.out.println(mp.size());
         return mp;
     }
 
-    private Map<String,Integer> getBestMap(Map<String,Integer> mp) throws IOException, InterruptedException {
+    public Map<String,Integer> getBestMap(Map<String,Integer> mp) throws IOException, InterruptedException {
 
         ExecutorService service = Executors.newCachedThreadPool();
         BSTask[] tasks = new BSTask[4];
@@ -156,113 +137,13 @@ public class HybridHuffmanZipperUnzipper implements IZipperUnzipper {
             }
         }
 
-        Map<String ,Integer> bestMap=generateDynamicMap(mp,bestPercentage);
         service.shutdownNow();
+
+        Map<String ,Integer> bestMap=generateDynamicMap(mp,bestPercentage);
 
         System.out.println(bestPercentage+" "+bestSize);
 
         return bestMap;
-
-
-
-
-//        ExecutorService service = Executors.newCachedThreadPool();
-//        Task[] tasks = new Task[4];
-//        List<Future<Integer>> futureList = new ArrayList<>();
-//        for (int i = 0; i < 4; i++) {
-//            tasks[i] = new Task(mp, i);
-//            futureList.add(service.submit(tasks[i]));
-//        }
-//
-//        long bestSize = Integer.MAX_VALUE;
-//        int bestPercentage=-1;
-//        Map<String ,Integer> bestMap=null;
-//
-//        for (int i = 0; i < 4; i++){
-//            try {
-//                int size = futureList.get(i).get();
-//                if(size<bestSize){
-//                    bestSize=size;
-//                    bestPercentage=tasks[i].bestPercent;
-//                    bestMap=tasks[i].bestMap;
-//                }
-//            } catch (ExecutionException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
-//        service.shutdownNow();
-//
-//        System.out.println(bestPercentage+" "+bestSize);
-//
-//        return bestMap;
-
-        //        DynamicPercentageThread[] tasksArray=new DynamicPercentageThread[10];
-//        Thread[] t=new Thread[10];
-//        for(int i=0;i<10;i++){
-//            tasksArray[i]=new DynamicPercentageThread(i*10,i*10+10,mp);
-//            t[i]=new Thread(tasksArray[i]);
-//            t[i].start();
-//        }
-//        for(int i=0;i<10;i++){
-//            t[i].join();
-//        }
-//        long bestSize=Integer.MAX_VALUE;
-//        int bestPercentage=-1;
-//        Map<String ,Integer> bestMap=null;
-//
-//        for(int i=0;i<10;i++){
-//            if(tasksArray[i].bestSize<bestSize){
-//                bestSize=tasksArray[i].bestSize;
-//                bestPercentage=tasksArray[i].bestPercent;
-//                bestMap=tasksArray[i].bestMap;
-//            }
-//        }
-
-//        System.out.println(bestPercentage+" "+bestSize);
-
-        /*
-
-        PercentageTask[] obj100=new PercentageTask[101];
-        List<Integer> looper = IntStream.rangeClosed(0, 100).boxed().collect(Collectors.toList());
-        looper.parallelStream().forEach((i) -> {
-            obj100[i]=new PercentageTask();
-            try {
-                obj100[i].getVals(mp,i);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        long bestSize=Integer.MAX_VALUE;
-        int bestPercentage=-1;
-        Map<String ,Integer> bestMap=null;
-        for(int i=0;i<=100;i++){
-            if(obj100[i].totalSize<bestSize){
-                bestSize=obj100[i].totalSize;
-                bestPercentage=i;
-                bestMap=obj100[i].tempMap;
-            }
-        }
-        System.out.println(bestPercentage);
-
-        return bestMap;
-
-
-         */
-
-//        for(int i=0; i<=100; i=i+1){
-//
-//
-////            double average=WAvg(tempMap,hash);
-////
-////            System.out.print("Best Percentage : "+i+" %");
-////            System.out.print("\t\tBest Size : "+ fileSize + mapSize);
-////            System.out.print("\t\tHeader Ratio : "+ ((double)mapSize/(fileSize + mapSize))*100);
-////            System.out.println("\t\tBits per char : "+ average);
-//        }
-//
-//
-
-//        System.out.println("Best Percentage : "+bestPercentage+" %");
     }
 
     public void compress(String originalFile, String compressedFile){

@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
@@ -58,12 +59,13 @@ public class HybridHuffmanZipperUnzipperTest {
 
 
     @Test
-    public void testCompress_NormalCase() throws IOException {
+    public void testCompress_NormalCase() throws IOException, InterruptedException {
         String originalFile = "input.txt";
         String compressedFile = "compress.txt";
+        HybridHuffmanZipperUnzipper spyObj= Mockito.spy(zipper);
+        doReturn(new HashMap<>()).when(spyObj).getBestMap(any());
 
-        zipper.compress(originalFile, compressedFile);
-
+        spyObj.compress(originalFile, compressedFile);
         InOrder checkInOrder= inOrder(fileReaderMock, compTreeMock, compMock, fileWriterMock, decompTreeMock, decompMock);
         checkInOrder.verify(fileReaderMock).readComp(any());
         checkInOrder.verify(compTreeMock).getFrequencyMap(any());

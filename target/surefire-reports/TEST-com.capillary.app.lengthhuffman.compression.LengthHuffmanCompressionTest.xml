@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="0" name="com.capillary.app.nativehuffman.compression.NativeHuffmanCompressionTest" time="0.007" errors="0" skipped="0">
+<testsuite tests="6" failures="0" name="com.capillary.app.lengthhuffman.compression.LengthHuffmanCompressionTest" time="0.005" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2022.3.2"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
@@ -62,9 +62,10 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.stdout.encoding" value="UTF-8"/>
   </properties>
-  <testcase classname="com.capillary.app.nativehuffman.compression.NativeHuffmanCompressionTest" name="testGetCompressedBytes_HashMapNullCase" time="0.005"/>
-  <testcase classname="com.capillary.app.nativehuffman.compression.NativeHuffmanCompressionTest" name="testGetCompressedBytes_NormalCase" time="0.001"/>
-  <testcase classname="com.capillary.app.nativehuffman.compression.NativeHuffmanCompressionTest" name="testByteFromByteList" time="0"/>
-  <testcase classname="com.capillary.app.nativehuffman.compression.NativeHuffmanCompressionTest" name="testGetCompressedBytes_ArrayNullCase" time="0"/>
-  <testcase classname="com.capillary.app.nativehuffman.compression.NativeHuffmanCompressionTest" name="testGetCompressedBytes_ArrayEmptyCase" time="0.001"/>
+  <testcase classname="com.capillary.app.lengthhuffman.compression.LengthHuffmanCompressionTest" name="testGetCompressedBytes_HashMapNullCase" time="0"/>
+  <testcase classname="com.capillary.app.lengthhuffman.compression.LengthHuffmanCompressionTest" name="testGetCompressedBytes_NormalCase" time="0"/>
+  <testcase classname="com.capillary.app.lengthhuffman.compression.LengthHuffmanCompressionTest" name="testGetCompressedBytes_ExtendedCase" time="0"/>
+  <testcase classname="com.capillary.app.lengthhuffman.compression.LengthHuffmanCompressionTest" name="testGetCompressedBytes_ArrayNullCase" time="0.001"/>
+  <testcase classname="com.capillary.app.lengthhuffman.compression.LengthHuffmanCompressionTest" name="testGetCompressedBytes_ExtraWordsCase" time="0.001"/>
+  <testcase classname="com.capillary.app.lengthhuffman.compression.LengthHuffmanCompressionTest" name="testGetCompressedBytes_ArrayEmptyCase" time="0.003"/>
 </testsuite>

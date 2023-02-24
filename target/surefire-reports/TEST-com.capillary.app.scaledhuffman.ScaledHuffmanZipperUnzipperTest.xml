@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="0" name="com.capillary.app.scaledhuffman.ScaledHuffmanZipperUnzipperTest" time="0.006" errors="0" skipped="0">
+<testsuite tests="5" failures="0" name="com.capillary.app.scaledhuffman.ScaledHuffmanZipperUnzipperTest" time="0.885" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2022.3.2"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
@@ -35,7 +35,7 @@
     <property name="java.class.version" value="63.0"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="5.15.0-60-generic"/>
+    <property name="os.version" value="5.19.0-32-generic"/>
     <property name="user.home" value="/home/dhanish"/>
     <property name="user.timezone" value="Asia/Kolkata"/>
     <property name="file.encoding" value="UTF-8"/>
@@ -62,9 +62,9 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.stdout.encoding" value="UTF-8"/>
   </properties>
-  <testcase classname="com.capillary.app.scaledhuffman.ScaledHuffmanZipperUnzipperTest" name="testCompress_NormalCase" time="0"/>
-  <testcase classname="com.capillary.app.scaledhuffman.ScaledHuffmanZipperUnzipperTest" name="testDecompress_ThrowsException" time="0"/>
-  <testcase classname="com.capillary.app.scaledhuffman.ScaledHuffmanZipperUnzipperTest" name="testDecompress_NormalCase" time="0.002"/>
-  <testcase classname="com.capillary.app.scaledhuffman.ScaledHuffmanZipperUnzipperTest" name="testWeightedAvg" time="0.002"/>
+  <testcase classname="com.capillary.app.scaledhuffman.ScaledHuffmanZipperUnzipperTest" name="testCompress_NormalCase" time="0.869"/>
+  <testcase classname="com.capillary.app.scaledhuffman.ScaledHuffmanZipperUnzipperTest" name="testDecompress_ThrowsException" time="0.014"/>
+  <testcase classname="com.capillary.app.scaledhuffman.ScaledHuffmanZipperUnzipperTest" name="testDecompress_NormalCase" time="0"/>
+  <testcase classname="com.capillary.app.scaledhuffman.ScaledHuffmanZipperUnzipperTest" name="testWeightedAvg" time="0"/>
   <testcase classname="com.capillary.app.scaledhuffman.ScaledHuffmanZipperUnzipperTest" name="testCompress_ThrowsException" time="0.002"/>
 </testsuite>

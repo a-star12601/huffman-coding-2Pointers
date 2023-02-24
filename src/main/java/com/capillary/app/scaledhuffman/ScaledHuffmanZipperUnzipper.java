@@ -1,15 +1,18 @@
 package com.capillary.app.scaledhuffman;
 
-import com.capillary.app.general.*;
+import com.capillary.app.general.ComplexReturnType;
+import com.capillary.app.general.FileRead;
+import com.capillary.app.general.FileWrite;
+import com.capillary.app.general.Node;
 import com.capillary.app.scaledhuffman.compression.ScaledHuffmanCompression;
 import com.capillary.app.scaledhuffman.compression.ScaledHuffmanCompressionTree;
 import com.capillary.app.scaledhuffman.decompression.ScaledHuffmanDecompression;
 import com.capillary.app.scaledhuffman.decompression.ScaledHuffmanDecompressionTree;
+import com.capillary.app.zipper.IZipperUnzipper;
 import com.capillary.app.zipper.compression.ICompression;
 import com.capillary.app.zipper.compression.ICompressionTree;
 import com.capillary.app.zipper.decompression.IDecompression;
 import com.capillary.app.zipper.decompression.IDecompressionTree;
-import com.capillary.app.zipper.IZipperUnzipper;
 
 import java.io.IOException;
 import java.util.List;

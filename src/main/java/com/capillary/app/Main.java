@@ -7,6 +7,7 @@ import com.capillary.app.lengthhuffman.LengthHuffmanZipperUnzipper;
 import com.capillary.app.nativehuffman.NativeHuffmanZipperUnzipper;
 import com.capillary.app.scaledhuffman.ScaledHuffmanZipperUnzipper;
 import com.capillary.app.zipper.IZipperUnzipper;
+
 import java.util.Scanner;
 
 /**

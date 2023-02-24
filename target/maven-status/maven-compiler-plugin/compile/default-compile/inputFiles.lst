@@ -1,10 +1,16 @@
+/home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/lengthhuffman/LengthHuffmanZipperUnzipper.java
+/home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/lengthhuffman/decompression/LengthHuffmanDecompressionTree.java
+/home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/hybridhuffman/BSTask.java
+/home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/hybridhuffman/BSObject.java
 /home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/hybridhuffman/compression/HybridHuffmanCompressionTree.java
 /home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/nativehuffman/decompression/NativeHuffmanDecompression.java
 /home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/zipper/compression/ICompressionTree.java
 /home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/scaledhuffman/compression/ScaledHuffmanCompression.java
 /home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/zipper/compression/ICompression.java
+/home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/lengthhuffman/decompression/LengthHuffmanDecompression.java
 /home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/nativehuffman/compression/NativeHuffmanCompression.java
 /home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/hybridhuffman/decompression/HybridHuffmanDecompressionTree.java
+/home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/lengthhuffman/compression/LengthHuffmanCompression.java
 /home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/hybridhuffman/decompression/HybridHuffmanDecompression.java
 /home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/general/FileWrite.java
 /home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/scaledhuffman/decompression/ScaledHuffmanDecompression.java
@@ -20,6 +26,7 @@
 /home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/general/NodeComparator.java
 /home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/nativehuffman/NativeHuffmanZipperUnzipper.java
 /home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/zipper/decompression/IDecompression.java
+/home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/lengthhuffman/compression/LengthHuffmanCompressionTree.java
 /home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/general/Node.java
 /home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/scaledhuffman/compression/ScaledHuffmanCompressionTree.java
 /home/dhanish/development/huffman-coding-2Pointers/src/main/java/com/capillary/app/zipper/decompression/IDecompressionTree.java

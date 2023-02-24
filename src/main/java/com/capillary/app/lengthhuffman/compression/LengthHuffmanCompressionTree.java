@@ -4,10 +4,7 @@ import com.capillary.app.general.Node;
 import com.capillary.app.general.NodeComparator;
 import com.capillary.app.zipper.compression.ICompressionTree;
 
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.*;
-import java.util.PriorityQueue;
 
 /**
  * Class for generating Word-Character-based Huffman Tree for encoding.
