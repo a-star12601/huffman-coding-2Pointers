@@ -17,10 +17,7 @@ import com.capillary.app.zipper.decompression.IDecompressionTree;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -88,30 +85,45 @@ public class HybridHuffmanZipperUnzipper implements IZipperUnzipper {
         this.dTree = dTree;
         this.decomp = decomp;
     }
+    Map<String,Integer> mp;
+    Map<String,Integer> bestMap;
 
-    public Map<String, Integer> generateDynamicMap(Map<String, Integer> sortedMap, int percentage){
-        Map<String, Integer> mp = new LinkedHashMap<>();
+    public void generateDynamicMap(List<Map.Entry<String, Integer>> list){
+        Node tree=cTree.generateTree(mp);
+        Map<String,String> hash= cTree.getHashTable(tree);
 
-        int limit = (int) Math.ceil(sortedMap.size() *  ((double) percentage/100));
-        int i=0;
-        for (Map.Entry<String, Integer> m : sortedMap.entrySet()){
-            if(i<limit){
-                mp.put(m.getKey(), m.getValue());
-                i++;
-            }else{
-                String k = m.getKey();
-                if(k.length() > 1){
-                    for(char c : k.toCharArray()){
-                        mp.put(c+"", mp.getOrDefault(c+"", 0)+m.getValue());
-                    }
-                }else{
-                    mp.put(k, mp.getOrDefault(k, 0)+m.getValue());
+        long mapsize=getMapSize(mp);
+        long filesize=getFileSize(mp,hash);
+
+        long bestSize=mapsize+filesize;
+
+        int counter=0;
+        int limit= (int) (list.size()*0.02);
+
+        for(Map.Entry<String,Integer> word:list){
+            mp.remove(word.getKey());
+            for(char c : word.getKey().toCharArray()){
+                mp.put(c+"", mp.getOrDefault(c+"", 0)+word.getValue());
+            }
+            if(++counter==limit){
+                tree=cTree.generateTree(mp);
+                hash= cTree.getHashTable(tree);
+
+                mapsize=getMapSize(mp);
+                filesize=getFileSize(mp,hash);
+                counter=0;
+                if(filesize+mapsize<bestSize){
+                    bestSize=filesize+mapsize;
+                    bestMap=mp;
+                }
+                else {
+                    break;
                 }
             }
         }
-        return mp;
-    }
 
+    }
+/*
     public Map<String,Integer> getBestMap(Map<String,Integer> mp) throws IOException, InterruptedException {
 
         ExecutorService service = Executors.newCachedThreadPool();
@@ -139,34 +151,48 @@ public class HybridHuffmanZipperUnzipper implements IZipperUnzipper {
 
         service.shutdownNow();
 
-        Map<String ,Integer> bestMap=generateDynamicMap(mp,bestPercentage);
+//        Map<String ,Integer> bestMap=generateDynamicMap(mp,bestPercentage);
 
         System.out.println(bestPercentage+" "+bestSize);
 
         return bestMap;
     }
 
+
+ */
+private static List<Map.Entry<String, Integer> > getSortedList(Map<String ,Integer> map){
+    List<Map.Entry<String, Integer> > list = new LinkedList<>(map.entrySet());
+    Collections.sort(
+            list,
+            (a, b) -> {
+                if(a.getValue() != b.getValue())
+                    return a.getValue() - b.getValue();
+                return a.getKey().length() - b.getKey().length();
+            });
+    return list;
+
+}
     public void compress(String originalFile, String compressedFile){
         try {
             byte[] inputBytes = fr.readComp(originalFile);
 
-            Map<String,Integer> map= cTree.getFrequencyMap(inputBytes);
+            mp= cTree.getFrequencyMap(inputBytes);
+            bestMap=mp;
+            List<Map.Entry<String, Integer>> list=getSortedList(mp);
+            generateDynamicMap(list);
+            //map = getBestMap(map);
 
-            map = getBestMap(map);
-
-            Node tree=cTree.generateTree(map);
+            Node tree=cTree.generateTree(bestMap);
             Map<String,String> hash= cTree.getHashTable(tree);
 
-            double average=WAvg(map,hash);
+            double average=WAvg(bestMap,hash);
             System.out.println("Average Bits per char : "+average);
 
             List<Byte> encodedList = comp.getCompressedBytes(inputBytes,hash);
             byte[] encodedBytes = comp.byteFromByteList(encodedList);
 
-            fw.writeComp(map,encodedBytes,compressedFile);
+            fw.writeComp(bestMap,encodedBytes,compressedFile);
         } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
@@ -205,5 +231,29 @@ public class HybridHuffmanZipperUnzipper implements IZipperUnzipper {
         }
         return sum/chars;
     }
+
+    private static long getFileSize(Map<String,Integer> map,Map<String,String> hash){
+        long sum=0;
+        for(Map.Entry<String,Integer> m: map.entrySet()){
+            sum+=m.getValue()*hash.get(m.getKey()).length();
+        }
+        return (long) Math.ceil(sum/8);
+    }
+
+    private static int getMapSize(Map<String, Integer> mp) {
+
+        ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
+        ObjectOutputStream objectOutputStream = null;
+        try {
+            objectOutputStream = new ObjectOutputStream(byteOutputStream);
+            objectOutputStream.writeObject(mp);
+            objectOutputStream.flush();
+            objectOutputStream.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return byteOutputStream.toByteArray().length;
+    }
+
 }
 

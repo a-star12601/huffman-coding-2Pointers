@@ -42,19 +42,8 @@ public class HybridHuffmanCompressionTree implements ICompressionTree<String> {
             map.put(curWord, map.getOrDefault(curWord, 0) + 1);
         }
 
-        List<Map.Entry<String, Integer> > list = new LinkedList<>(map.entrySet());
-        Collections.sort(
-                list,
-                (a, b) -> {
-                    if(a.getValue() != b.getValue())
-                        return b.getValue() - a.getValue();
-                    return b.getKey().length() - a.getKey().length();
-                });
+        return map;
 
-        Map<String, Integer> sortedMap = new LinkedHashMap<>();
-        for (Map.Entry<String, Integer> l : list) {
-            sortedMap.put(l.getKey(), l.getValue());
-        }
 
 //        Map<String, Integer> mp = new LinkedHashMap<>();
 //
@@ -76,7 +65,7 @@ public class HybridHuffmanCompressionTree implements ICompressionTree<String> {
 //            }
 //        }
 //        System.out.println(mp.size());
-        return sortedMap;
+//        return sortedMap;
     }
 
     @Override
