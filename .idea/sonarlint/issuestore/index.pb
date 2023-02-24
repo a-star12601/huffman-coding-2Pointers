@@ -5,10 +5,6 @@
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 n
 >src/main/java/com/capillary/app/general/ComplexReturnType.java,1/d/1def129f51b8ff3eb96cd5d07e16dd500f312fcd
-f
-6src/main/java/com/capillary/app/general/FileWrite.java,c/1/c19b568eaf77184c5959d20d34d36a56a3c71fe3
-e
-5src/main/java/com/capillary/app/general/FileRead.java,7/2/72b22be4e3ee3e0ccb91266a67c7907c581d343b
 a
 1src/main/java/com/capillary/app/general/Node.java,5/4/54cbadf57d413c1a93889a4bac26fdd121be17ab
 k

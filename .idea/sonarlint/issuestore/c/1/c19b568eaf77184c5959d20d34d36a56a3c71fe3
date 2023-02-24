@@ -1,10 +1,0 @@
-
-[	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ìéç„
-f
-java:S2095"PUse try-with-resources or close this "ObjectOutputStream" in a "finally" clause.(§ä¢®
-c
-java:S2095"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(Ç–úx
-d
-java:S2095/"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(ÙÄÁÃ
-@
-java:S1197"*Move the array designators [] to the type.(§Áºé

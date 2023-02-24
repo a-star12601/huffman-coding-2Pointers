@@ -36,7 +36,7 @@ public class FileRead<T> {
     public ComplexReturnType<T> readDecomp(String path) {
         try{
             FileInputStream fin = new FileInputStream(path);
-            ObjectInputStream in = new ObjectInputStream(fin);
+            ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(fin));
 
             Map<T,Integer> map= (Map<T, Integer>) in.readObject();
             byte[] compressBytes = (byte[]) in.readObject();

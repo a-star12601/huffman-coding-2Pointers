@@ -132,35 +132,69 @@ public class HybridHuffmanZipperUnzipper implements IZipperUnzipper {
     }
 
     private Map<String,Integer> getBestMap(Map<String,Integer> mp) throws IOException, InterruptedException {
+
         ExecutorService service = Executors.newCachedThreadPool();
-        Task[] tasks = new Task[4];
+        BSTask[] tasks = new BSTask[4];
         List<Future<Integer>> futureList = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            tasks[i] = new Task(mp, i);
+            tasks[i] = new BSTask(mp, i);
             futureList.add(service.submit(tasks[i]));
         }
 
         long bestSize = Integer.MAX_VALUE;
         int bestPercentage=-1;
-        Map<String ,Integer> bestMap=null;
 
         for (int i = 0; i < 4; i++){
             try {
                 int size = futureList.get(i).get();
                 if(size<bestSize){
                     bestSize=size;
-                    bestPercentage=tasks[i].bestPercent;
-                    bestMap=tasks[i].bestMap;
+                    bestPercentage=tasks[i].bestPercentage;
                 }
             } catch (ExecutionException e) {
                 throw new RuntimeException(e);
             }
         }
+
+        Map<String ,Integer> bestMap=generateDynamicMap(mp,bestPercentage);
         service.shutdownNow();
 
         System.out.println(bestPercentage+" "+bestSize);
 
         return bestMap;
+
+
+
+
+//        ExecutorService service = Executors.newCachedThreadPool();
+//        Task[] tasks = new Task[4];
+//        List<Future<Integer>> futureList = new ArrayList<>();
+//        for (int i = 0; i < 4; i++) {
+//            tasks[i] = new Task(mp, i);
+//            futureList.add(service.submit(tasks[i]));
+//        }
+//
+//        long bestSize = Integer.MAX_VALUE;
+//        int bestPercentage=-1;
+//        Map<String ,Integer> bestMap=null;
+//
+//        for (int i = 0; i < 4; i++){
+//            try {
+//                int size = futureList.get(i).get();
+//                if(size<bestSize){
+//                    bestSize=size;
+//                    bestPercentage=tasks[i].bestPercent;
+//                    bestMap=tasks[i].bestMap;
+//                }
+//            } catch (ExecutionException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
+//        service.shutdownNow();
+//
+//        System.out.println(bestPercentage+" "+bestSize);
+//
+//        return bestMap;
 
         //        DynamicPercentageThread[] tasksArray=new DynamicPercentageThread[10];
 //        Thread[] t=new Thread[10];

@@ -1,5 +1,6 @@
 package com.capillary.app.general;
 
+import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -25,7 +26,7 @@ public class FileWrite<T> {
         }
 
         FileOutputStream fout = new FileOutputStream(compressedFile);
-        ObjectOutputStream out =new ObjectOutputStream(fout);
+        ObjectOutputStream out =new ObjectOutputStream(new BufferedOutputStream(fout));
 
         out.writeObject(map);
         out.writeObject(arr);
