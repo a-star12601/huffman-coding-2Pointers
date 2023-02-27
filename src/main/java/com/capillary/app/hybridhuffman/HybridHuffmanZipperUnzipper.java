@@ -86,6 +86,7 @@ public class HybridHuffmanZipperUnzipper implements IZipperUnzipper {
         this.decomp = decomp;
     }
     Map<String,Integer> mp;
+    Map<String,Integer> mp2;
     Map<String,Integer> bestMap;
 
     public void generateDynamicMap(List<Map.Entry<String, Integer>> list){
@@ -165,18 +166,43 @@ private static List<Map.Entry<String, Integer> > getSortedList(Map<String ,Integ
     Collections.sort(
             list,
             (a, b) -> {
-                if(a.getValue() != b.getValue())
-                    return a.getValue() - b.getValue();
+                if(a.getValue()*a.getKey().length() != b.getValue()*b.getKey().length())
+                    return a.getValue()*a.getKey().length() - b.getValue()*b.getKey().length();
                 return a.getKey().length() - b.getKey().length();
             });
     return list;
 
 }
+
+    private static boolean isLetterOrDigit(char c) {
+        return (c >= 'a' && c <= 'z') ||
+                (c >= 'A' && c <= 'Z') ||
+                (c >= '0' && c <= '9');
+    }
+
     public void compress(String originalFile, String compressedFile){
         try {
             byte[] inputBytes = fr.readComp(originalFile);
+            int mid=inputBytes.length/2;
+            while(isLetterOrDigit((char) inputBytes[mid])){
+                mid++;
+            }
 
-            mp= cTree.getFrequencyMap(inputBytes);
+            byte half1[] = Arrays.copyOfRange(inputBytes, 0, mid);
+            byte half2[] = Arrays.copyOfRange(inputBytes, mid, inputBytes.length);
+
+
+
+            Thread t1=new Thread(() -> mp= cTree.getFrequencyMap(half1));
+            t1.start();
+            Thread t2=new Thread(() -> mp2=cTree.getFrequencyMap(half2));
+            t2.start();
+            t1.join();t2.join();
+            for(Map.Entry<String,Integer> e:mp2.entrySet()){
+                mp.put(e.getKey(),mp.getOrDefault(e.getKey(),0)+e.getValue());
+            }
+
+
             bestMap=mp;
             List<Map.Entry<String, Integer>> list=getSortedList(mp);
             generateDynamicMap(list);
@@ -193,6 +219,8 @@ private static List<Map.Entry<String, Integer> > getSortedList(Map<String ,Integ
 
             fw.writeComp(bestMap,encodedBytes,compressedFile);
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }

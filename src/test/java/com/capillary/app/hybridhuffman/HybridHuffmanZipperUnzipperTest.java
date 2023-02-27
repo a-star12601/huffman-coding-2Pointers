@@ -63,7 +63,7 @@ public class HybridHuffmanZipperUnzipperTest {
         String originalFile = "input.txt";
         String compressedFile = "compress.txt";
         HybridHuffmanZipperUnzipper spyObj= Mockito.spy(zipper);
-        doReturn(new HashMap<>()).when(spyObj).getBestMap(any());
+        //doReturn(new HashMap<>()).when(spyObj).generateDynamicMap(any());
 
         spyObj.compress(originalFile, compressedFile);
         InOrder checkInOrder= inOrder(fileReaderMock, compTreeMock, compMock, fileWriterMock, decompTreeMock, decompMock);

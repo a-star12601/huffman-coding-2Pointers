@@ -10,11 +10,6 @@ import java.util.Map;
  * Class for Performing Word-Character-based Encoding.
  */
 public class HybridHuffmanCompression implements ICompression<String> {
-    private static boolean isLetterOrDigit(char c) {
-        return (c >= 'a' && c <= 'z') ||
-                (c >= 'A' && c <= 'Z') ||
-                (c >= '0' && c <= '9');
-    }
 
     @Override
     public List<Byte> getCompressedBytes(byte[] arr, Map<String,String> hash){
@@ -32,7 +27,7 @@ public class HybridHuffmanCompression implements ICompression<String> {
 
         for (byte c : arr) {
             char ch = (char) c;
-            if(isLetterOrDigit(ch)){
+            if(Character.isLetterOrDigit(ch)){
                 curWord+=ch;
             }
             else {
