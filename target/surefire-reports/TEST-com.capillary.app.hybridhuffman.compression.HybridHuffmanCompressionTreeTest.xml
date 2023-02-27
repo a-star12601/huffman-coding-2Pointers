@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="10" failures="0" name="com.capillary.app.hybridhuffman.compression.HybridHuffmanCompressionTreeTest" time="0.019" errors="0" skipped="0">
+<testsuite tests="10" failures="0" name="com.capillary.app.hybridhuffman.compression.HybridHuffmanCompressionTreeTest" time="0.032" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2022.3.2"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="19.0.2+7-44"/>
-    <property name="sun.boot.library.path" value="/home/dhanish/.jdks/openjdk-19.0.2/lib"/>
-    <property name="maven.multiModuleProjectDirectory" value="/home/dhanish/development/huffman-coding-2Pointers"/>
+    <property name="sun.boot.library.path" value="/home/ranuroop/.jdks/openjdk-19.0.2/lib"/>
+    <property name="maven.multiModuleProjectDirectory" value="/home/ranuroop/IdeaProjects/Huffman2Pointers"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="https://java.oracle.com/"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -14,7 +14,7 @@
     <property name="user.country" value="IN"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/home/dhanish/development/huffman-coding-2Pointers"/>
+    <property name="user.dir" value="/home/ranuroop/IdeaProjects/Huffman2Pointers"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="java.runtime.version" value="19.0.2+7-44"/>
     <property name="os.arch" value="amd64"/>
@@ -24,28 +24,28 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="stderr.encoding" value="UTF-8"/>
     <property name="os.name" value="Linux"/>
-    <property name="maven.ext.class.path" value="/snap/intellij-idea-ultimate/405/plugins/maven/lib/maven-event-listener.jar"/>
-    <property name="classworlds.conf" value="/snap/intellij-idea-ultimate/405/plugins/maven/lib/maven3/bin/m2.conf"/>
+    <property name="maven.ext.class.path" value="/snap/intellij-idea-community/409/plugins/maven/lib/maven-event-listener.jar"/>
+    <property name="classworlds.conf" value="/snap/intellij-idea-community/409/plugins/maven/lib/maven3/bin/m2.conf"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="stdout.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
     <property name="jansi.passthrough" value="true"/>
-    <property name="maven.conf" value="/snap/intellij-idea-ultimate/405/plugins/maven/lib/maven3/conf"/>
+    <property name="maven.conf" value="/snap/intellij-idea-community/409/plugins/maven/lib/maven3/conf"/>
     <property name="jdk.debug" value="release"/>
     <property name="java.class.version" value="63.0"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="os.version" value="5.19.0-32-generic"/>
-    <property name="user.home" value="/home/dhanish"/>
+    <property name="user.home" value="/home/ranuroop"/>
     <property name="user.timezone" value="Asia/Kolkata"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="19"/>
-    <property name="user.name" value="dhanish"/>
-    <property name="java.class.path" value="/snap/intellij-idea-ultimate/405/plugins/maven/lib/maven3/boot/plexus-classworlds-2.6.0.jar:/snap/intellij-idea-ultimate/405/plugins/maven/lib/maven3/boot/plexus-classworlds.license"/>
+    <property name="user.name" value="ranuroop"/>
+    <property name="java.class.path" value="/snap/intellij-idea-community/409/plugins/maven/lib/maven3/boot/plexus-classworlds-2.6.0.jar:/snap/intellij-idea-community/409/plugins/maven/lib/maven3/boot/plexus-classworlds.license"/>
     <property name="java.vm.specification.version" value="19"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version=2022.3.2 install"/>
-    <property name="java.home" value="/home/dhanish/.jdks/openjdk-19.0.2"/>
+    <property name="java.home" value="/home/ranuroop/.jdks/openjdk-19.0.2"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
@@ -54,7 +54,7 @@
     <property name="securerandom.source" value="file:/dev/./urandom"/>
     <property name="java.vendor" value="Oracle Corporation"/>
     <property name="sun.stderr.encoding" value="UTF-8"/>
-    <property name="maven.home" value="/snap/intellij-idea-ultimate/405/plugins/maven/lib/maven3"/>
+    <property name="maven.home" value="/snap/intellij-idea-community/409/plugins/maven/lib/maven3"/>
     <property name="file.separator" value="/"/>
     <property name="java.version.date" value="2023-01-17"/>
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
@@ -62,13 +62,13 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.stdout.encoding" value="UTF-8"/>
   </properties>
-  <testcase classname="com.capillary.app.hybridhuffman.compression.HybridHuffmanCompressionTreeTest" name="testGenerateTree_SingleNodeCase" time="0.005"/>
-  <testcase classname="com.capillary.app.hybridhuffman.compression.HybridHuffmanCompressionTreeTest" name="testGenerateTree_MapIsEmpty" time="0.005"/>
+  <testcase classname="com.capillary.app.hybridhuffman.compression.HybridHuffmanCompressionTreeTest" name="testGenerateTree_SingleNodeCase" time="0.009"/>
+  <testcase classname="com.capillary.app.hybridhuffman.compression.HybridHuffmanCompressionTreeTest" name="testGenerateTree_MapIsEmpty" time="0.003"/>
   <testcase classname="com.capillary.app.hybridhuffman.compression.HybridHuffmanCompressionTreeTest" name="testGetHashTable_TreeIsNull" time="0.001"/>
-  <testcase classname="com.capillary.app.hybridhuffman.compression.HybridHuffmanCompressionTreeTest" name="testGenerateTree_MapIsNull" time="0.002"/>
-  <testcase classname="com.capillary.app.hybridhuffman.compression.HybridHuffmanCompressionTreeTest" name="testGenerateTree_NormalCase" time="0.001"/>
-  <testcase classname="com.capillary.app.hybridhuffman.compression.HybridHuffmanCompressionTreeTest" name="testGetFrequencyMap_NormalCase" time="0.002"/>
-  <testcase classname="com.capillary.app.hybridhuffman.compression.HybridHuffmanCompressionTreeTest" name="testGetFrequencyMap_ExtraWordCase" time="0"/>
+  <testcase classname="com.capillary.app.hybridhuffman.compression.HybridHuffmanCompressionTreeTest" name="testGenerateTree_MapIsNull" time="0.001"/>
+  <testcase classname="com.capillary.app.hybridhuffman.compression.HybridHuffmanCompressionTreeTest" name="testGenerateTree_NormalCase" time="0.002"/>
+  <testcase classname="com.capillary.app.hybridhuffman.compression.HybridHuffmanCompressionTreeTest" name="testGetFrequencyMap_NormalCase" time="0.012"/>
+  <testcase classname="com.capillary.app.hybridhuffman.compression.HybridHuffmanCompressionTreeTest" name="testGetFrequencyMap_ExtraWordCase" time="0.001"/>
   <testcase classname="com.capillary.app.hybridhuffman.compression.HybridHuffmanCompressionTreeTest" name="testGetFrequencyMap_ArrayIsNull" time="0.001"/>
   <testcase classname="com.capillary.app.hybridhuffman.compression.HybridHuffmanCompressionTreeTest" name="testGetFrequencyMap_ArrayIsEmpty" time="0.001"/>
   <testcase classname="com.capillary.app.hybridhuffman.compression.HybridHuffmanCompressionTreeTest" name="testGetHashTable_NormalCase" time="0.001"/>
