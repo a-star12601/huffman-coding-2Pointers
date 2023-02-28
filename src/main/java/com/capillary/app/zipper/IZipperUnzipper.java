@@ -18,6 +18,6 @@ public interface IZipperUnzipper {
      * @param compressedFile   the compressed file
      * @param decompressedFile the decompressed file
      */
-    public void decompress(String compressedFile, String decompressedFile);
+    public String decompress(String compressedFile, String decompressedFile);
 
 }

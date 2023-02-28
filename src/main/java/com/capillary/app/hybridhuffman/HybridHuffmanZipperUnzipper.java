@@ -1,9 +1,6 @@
 package com.capillary.app.hybridhuffman;
 
-import com.capillary.app.general.ComplexReturnType;
-import com.capillary.app.general.FileRead;
-import com.capillary.app.general.FileWrite;
-import com.capillary.app.general.Node;
+import com.capillary.app.general.*;
 import com.capillary.app.hybridhuffman.compression.HybridHuffmanCompression;
 import com.capillary.app.hybridhuffman.compression.HybridHuffmanCompressionTree;
 import com.capillary.app.hybridhuffman.decompression.HybridHuffmanDecompression;
@@ -213,7 +210,10 @@ private static List<Map.Entry<String, Integer> > getSortedList(Map<String ,Integ
             List<Byte> encodedList = comp.getCompressedBytes(inputBytes,hash);
             byte[] encodedBytes = comp.byteFromByteList(encodedList);
 
-            fw.writeComp(bestMap,encodedBytes,compressedFile);
+            GenerateHash gh = new GenerateHash();
+            String fileHash = gh.getHash(inputBytes, "MD5");
+
+            fw.writeComp(bestMap,encodedBytes,compressedFile, fileHash);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (InterruptedException e) {
@@ -221,19 +221,19 @@ private static List<Map.Entry<String, Integer> > getSortedList(Map<String ,Integ
         }
     }
 
-    public void decompress(String compressedFile, String decompressedFile) {
+    public String decompress(String compressedFile, String decompressedFile) {
         try {
             ComplexReturnType crt = fr.readDecomp(compressedFile);
             Map<String, Integer> map = crt.getMap();
             byte[] compressBytes = crt.getByteArray();
-
-
+            String hash = crt.getHash();
 
             Node tree=dTree.regenerateTree(map);
 
             byte[] exportBytes=decomp.getDecompressedBytes(compressBytes,tree,decomp.getCharCount(map));
 
             fw.writeDecomp(decompressedFile,false,exportBytes);
+            return hash;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

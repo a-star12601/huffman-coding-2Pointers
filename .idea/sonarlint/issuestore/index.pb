@@ -3,8 +3,6 @@
 Huffman.iml,6\d\6d9c04013fa5170832c9d8b7e677943a3e3d5535
 9
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-n
->src/main/java/com/capillary/app/general/ComplexReturnType.java,1/d/1def129f51b8ff3eb96cd5d07e16dd500f312fcd
 a
 1src/main/java/com/capillary/app/general/Node.java,5/4/54cbadf57d413c1a93889a4bac26fdd121be17ab
 k
@@ -13,8 +11,6 @@ k
 [src/main/java/com/capillary/app/lengthhuffman/compression/LengthHuffmanCompressionTree.java,8/7/87eafbdbe93beb0938c61036a41456ec207d5051
 ã
 [src/main/java/com/capillary/app/lengthhuffman/decompression/LengthHuffmanDecompression.java,0/8/08ef8e559cca19f623a09b79b60f13765ca8b3b8
-~
-Nsrc/main/java/com/capillary/app/lengthhuffman/LengthHuffmanZipperUnzipper.java,f/8/f898d6b299ba05001f81b902e160884f9f655592
 è
 _src/main/java/com/capillary/app/lengthhuffman/decompression/LengthHuffmanDecompressionTree.java,6/8/688342b09dfbeefed14b09f2068fe8b523b6bbe9
 á
@@ -27,8 +23,6 @@ Wsrc/main/java/com/capillary/app/nativehuffman/compression/NativeHuffmanCompress
 [src/main/java/com/capillary/app/nativehuffman/decompression/NativeHuffmanDecompression.java,6/0/60b5504893b7e9ede7ad0b87ec384c4aa4dda004
 è
 _src/main/java/com/capillary/app/nativehuffman/decompression/NativeHuffmanDecompressionTree.java,4/a/4aaa53409d245cc64983b5c961fd24735dfb2231
-~
-Nsrc/main/java/com/capillary/app/nativehuffman/NativeHuffmanZipperUnzipper.java,4/a/4a74353e6baa9202554c671ec191a56c9940a031
 á
 Wsrc/main/java/com/capillary/app/scaledhuffman/compression/ScaledHuffmanCompression.java,e/0/e05a2860607175177cdb7d97fab20ef25e376128
 ã
@@ -37,13 +31,9 @@ Wsrc/main/java/com/capillary/app/scaledhuffman/compression/ScaledHuffmanCompress
 [src/main/java/com/capillary/app/scaledhuffman/decompression/ScaledHuffmanDecompression.java,6/b/6b4bc9d0f963d7ca28d4e3974c071467ebd2e6f5
 è
 _src/main/java/com/capillary/app/scaledhuffman/decompression/ScaledHuffmanDecompressionTree.java,4/d/4d822c3f103ca4c6a8e42e991af3d7fae3aa2efc
-~
-Nsrc/main/java/com/capillary/app/scaledhuffman/ScaledHuffmanZipperUnzipper.java,8/b/8b1e6aa8eaac6cd3527aeb9d54d1f9626d608a70
 t
 Dsrc/main/java/com/capillary/app/zipper/compression/ICompression.java,c/3/c30e45bb7172fdbf1c008b396b0b3c89354301eb
 x
 Hsrc/main/java/com/capillary/app/zipper/decompression/IDecompression.java,3/a/3ad2e16fab1ef989269953da4354ab9637f6c9b6
 |
 Lsrc/main/java/com/capillary/app/zipper/decompression/IDecompressionTree.java,6/1/6127bfa6f401b70f6602ba750460d043fd4a1670
-k
-;src/main/java/com/capillary/app/zipper/IZipperUnzipper.java,2/1/217d3cc0eefa9e29be9063289ad0556fc2b07e4b

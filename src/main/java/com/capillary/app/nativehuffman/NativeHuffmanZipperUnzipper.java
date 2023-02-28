@@ -1,9 +1,6 @@
 package com.capillary.app.nativehuffman;
 
-import com.capillary.app.general.ComplexReturnType;
-import com.capillary.app.general.FileRead;
-import com.capillary.app.general.FileWrite;
-import com.capillary.app.general.Node;
+import com.capillary.app.general.*;
 import com.capillary.app.nativehuffman.compression.NativeHuffmanCompression;
 import com.capillary.app.nativehuffman.compression.NativeHuffmanCompressionTree;
 import com.capillary.app.nativehuffman.decompression.NativeHuffmanDecompression;
@@ -76,23 +73,28 @@ public class NativeHuffmanZipperUnzipper implements IZipperUnzipper {
             List<Byte> encodedList = comp.getCompressedBytes(inputBytes,hash);
             byte[] encodedBytes = comp.byteFromByteList(encodedList);
 
-            fw.writeComp(map,encodedBytes,compressedFile);
+            GenerateHash gh = new GenerateHash();
+            String fileHash = gh.getHash(inputBytes, "MD5");
+
+            fw.writeComp(map,encodedBytes,compressedFile, fileHash);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void decompress(String compressedFile, String decompressedFile) {
+    public String decompress(String compressedFile, String decompressedFile) {
         try {
             ComplexReturnType crt = fr.readDecomp(compressedFile);
             Map<Character, Integer> map = crt.getMap();
             byte[] compressBytes = crt.getByteArray();
+            String hash = crt.getHash();
 
             Node tree=dTree.regenerateTree(map);
 
             byte[] exportBytes=decomp.getDecompressedBytes(compressBytes,tree,decomp.getCharCount(map));
 
             fw.writeDecomp(decompressedFile,false,exportBytes);
+            return hash;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

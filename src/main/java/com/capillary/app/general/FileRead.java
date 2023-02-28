@@ -40,11 +40,12 @@ public class FileRead<T> {
 
             Map<T,Integer> map= (Map<T, Integer>) in.readObject();
             byte[] compressBytes = (byte[]) in.readObject();
+            String hash = (String) in.readObject();
 
             in.close();
             fin.close();
 
-            ComplexReturnType<T> crt = new ComplexReturnType(map, compressBytes);
+            ComplexReturnType<T> crt = new ComplexReturnType(map, compressBytes, hash);
             return crt;
         }catch (Exception e){
             throw new RuntimeException(e);

@@ -26,6 +26,10 @@ public class ComplexReturnType<T> {
         return byteArray;
     }
 
+    public String getHash() {
+        return hash;
+    }
+
     /**
      * Variable to store the map.
      */
@@ -35,14 +39,17 @@ public class ComplexReturnType<T> {
      */
     byte[] byteArray;
 
+    String hash;
+
     /**
      * Constructor for the class.
      *
      * @param mp        the map
      * @param byteArray the byte array
      */
-    public ComplexReturnType(Map<T, Integer> mp, byte[] byteArray){
+    public ComplexReturnType(Map<T, Integer> mp, byte[] byteArray, String hash){
         this.mp = mp;
         this.byteArray = byteArray;
+        this.hash=hash;
     }
 }

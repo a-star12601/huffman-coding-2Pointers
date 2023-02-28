@@ -21,7 +21,7 @@ public class CompressionStats {
      * @param file2 the file 2
      * @return true if files match, else false
      */
-    public boolean compareFiles(String file1, String file2){
+    private boolean compareFiles(String file1, String file2){
         FileRead f=new FileRead();
         try {
             byte[] arr1 = f.readComp(file1);
@@ -37,6 +37,21 @@ public class CompressionStats {
         }
     }
 
+    private boolean hashCampare(String hash, String decompressedFile){
+        GenerateHash gh = new GenerateHash();
+
+        FileRead f=new FileRead();
+        byte[] byteArray;
+        try {
+            byteArray = f.readComp(decompressedFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        String newHash = gh.getHash(byteArray, "MD5");
+        return hash.equals(newHash);
+    }
+
     /**
      * Funtion to log out stats related to compression.
      *
@@ -48,6 +63,32 @@ public class CompressionStats {
      */
     public void getStats(String originalFile,String compressedFile, String decompressedFile,long compressionTime,long decompressionTime){
         boolean isEqual = compareFiles(originalFile, decompressedFile);
+
+        if(isEqual){
+            File of = new File(originalFile);
+            long ofl = of.length();
+
+            File cf = new File(compressedFile);
+            long cfl = cf.length();
+
+            File df = new File(decompressedFile);
+            long dfl = df.length();
+
+
+            logger.info("\n********** Operation Successful **********\n"+
+                    "\nCompress Time : " + compressionTime + " ms"+
+                    "\nDecompress Time : " + decompressionTime + " ms"+
+                    "\nOriginal File Size : " + (float) ofl / (1024* 1024)+ " MB"+
+                    "\nCompressed File Size : " + (float) cfl / (1024* 1024) + " MB"+
+                    "\nDecompressed File Size : " + (float) dfl / (1024* 1024) + " MB"+
+                    "\nCompression Ratio : " + ((float)(ofl-cfl)/ofl)*100 + " %");
+        }else {
+            logger.info("\n********** Operation Failed **********\n");
+        }
+    }
+
+    public void getStats(String originalFile,String compressedFile, String decompressedFile,long compressionTime,long decompressionTime, String hash){
+        boolean isEqual = hashCampare(hash, decompressedFile);
 
         if(isEqual){
             File of = new File(originalFile);

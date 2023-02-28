@@ -75,12 +75,13 @@ public class Main{
             long compressionTime = end - start;
 
             start = System.currentTimeMillis();
-            fileZipper.decompress(compressed, decompressed);
+            String hash = fileZipper.decompress(compressed, decompressed);
             end = System.currentTimeMillis();
             long decompressionTime = end - start;
 
             CompressionStats st=new CompressionStats();
-            st.getStats(filename,compressed,decompressed,compressionTime,decompressionTime);
+//            st.getStats(filename,compressed,decompressed,compressionTime,decompressionTime);
+            st.getStats(filename,compressed,decompressed,compressionTime,decompressionTime, hash);
         }
 
         System.out.println("Total memory Used : " + ((runtime.totalMemory() - runtime.freeMemory()) / (1024 * 1024)) + "MB");

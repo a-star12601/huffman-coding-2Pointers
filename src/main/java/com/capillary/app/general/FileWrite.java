@@ -20,7 +20,7 @@ public class FileWrite<T> {
      * @param compressedFile the compressed file
      * @throws IOException the io exception
      */
-    public void writeComp(Map<T,Integer> map, byte arr[], String compressedFile) throws IOException {
+    public void writeComp(Map<T,Integer> map, byte arr[], String compressedFile, String hash) throws IOException {
         if(map == null || map.isEmpty()){
             throw new RuntimeException("Map is Null/Empty!!");
         }
@@ -30,6 +30,7 @@ public class FileWrite<T> {
 
         out.writeObject(map);
         out.writeObject(arr);
+        out.writeObject(hash);
 
         out.close();
         fout.close();
