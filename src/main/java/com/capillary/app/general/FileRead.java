@@ -51,4 +51,21 @@ public class FileRead<T> {
             throw new RuntimeException(e);
         }
     }
+    public ComplexReturnType<T> readDecompDB(String path) {
+        try{
+            FileInputStream fin = new FileInputStream(path);
+            ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(fin));
+
+            byte[] compressBytes = (byte[]) in.readObject();
+            String hash = (String) in.readObject();
+
+            in.close();
+            fin.close();
+
+            ComplexReturnType<T> crt = new ComplexReturnType(null, compressBytes, hash);
+            return crt;
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
 }

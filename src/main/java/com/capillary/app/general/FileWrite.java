@@ -36,6 +36,18 @@ public class FileWrite<T> {
         fout.close();
 
     }
+    public void writeCompDB(byte arr[], String compressedFile, String hash) throws IOException {
+
+        FileOutputStream fout = new FileOutputStream(compressedFile);
+        ObjectOutputStream out =new ObjectOutputStream(new BufferedOutputStream(fout));
+
+        out.writeObject(arr);
+        out.writeObject(hash);
+
+        out.close();
+        fout.close();
+
+    }
 
     /**
      * Function to write to file on the decompression side.

@@ -2,6 +2,7 @@ package com.capillary.app;
 
 import com.capillary.app.general.CompressionStats;
 import com.capillary.app.general.Validator;
+import com.capillary.app.hybridhuffman.DBHybridHuffmanZipperUnzipper;
 import com.capillary.app.hybridhuffman.HybridHuffmanZipperUnzipper;
 import com.capillary.app.lengthhuffman.LengthHuffmanZipperUnzipper;
 import com.capillary.app.nativehuffman.NativeHuffmanZipperUnzipper;
@@ -60,6 +61,9 @@ public class Main{
                 break;
             case 4:
                 fileZipper = new LengthHuffmanZipperUnzipper();
+                break;
+            case 5:
+                fileZipper = new DBHybridHuffmanZipperUnzipper();
                 break;
             default:
                 System.out.println("Invalid Choice!!");
