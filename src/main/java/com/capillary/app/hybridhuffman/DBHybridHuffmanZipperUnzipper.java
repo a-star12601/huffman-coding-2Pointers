@@ -147,8 +147,8 @@ private static List<Map.Entry<String, Integer> > getSortedList(Map<String ,Integ
             String fileHash = gh.getHash(inputBytes, "MD5");
 
             db.createNewTable();
-            Map<String,Integer> map=(Map<String, Integer>) db.readHashMap(fileHash);
-            //System.out.println(map);
+            Map<String,Integer> map = db.readHashMap(fileHash);
+
             if(map!=null){
                 bestMap=map;
             }
@@ -162,23 +162,21 @@ private static List<Map.Entry<String, Integer> > getSortedList(Map<String ,Integ
                 byte half2[] = Arrays.copyOfRange(inputBytes, mid, inputBytes.length);
 
 
-
                 Thread t1=new Thread(() -> mp= cTree.getFrequencyMap(half1));
                 t1.start();
                 Thread t2=new Thread(() -> mp2=cTree.getFrequencyMap(half2));
                 t2.start();
                 t1.join();t2.join();
+
                 for(Map.Entry<String,Integer> e:mp2.entrySet()){
                     mp.put(e.getKey(),mp.getOrDefault(e.getKey(),0)+e.getValue());
                 }
 
-
                 bestMap=mp;
                 List<Map.Entry<String, Integer>> list=getSortedList(mp);
                 generateDynamicMap(list);
-                db.insert(fileHash,getMapBytes(bestMap));
+                db.insert(fileHash, getMapBytes(bestMap));
             }
-            //map = getBestMap(map);
 
             Node tree=cTree.generateTree(bestMap);
             Map<String,String> hash= cTree.getHashTable(tree);
@@ -205,7 +203,7 @@ private static List<Map.Entry<String, Integer> > getSortedList(Map<String ,Integ
             byte[] compressBytes = crt.getByteArray();
             String hash = crt.getHash();
 
-            Map<String, Integer> map = (Map<String, Integer>) db.readHashMap(hash);
+            Map<String, Integer> map =  db.readHashMap(hash);
 
             Node tree=dTree.regenerateTree(map);
 

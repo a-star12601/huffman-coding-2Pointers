@@ -9,17 +9,15 @@ import java.util.Map;
 public class SQLiteDB implements IDataBase{
 
     @Override
-    public void delete(int id) {
+    public void delete(String mdHash) {
         PreparedStatement pstmt = null;
         Connection conn=connect();
-        String sql = "DELETE FROM FrequencyMap WHERE id = ?";
+        String sql = "DELETE FROM FrequencyMap WHERE mdHhash = ?";
 
         if (conn != null){
             try {
                 pstmt = conn.prepareStatement(sql);
-
-                pstmt.setInt(1, id);
-
+                pstmt.setString(1, mdHash);
                 pstmt.executeUpdate();
 
                 System.out.println("Row deleted Successfully");
@@ -38,19 +36,23 @@ public class SQLiteDB implements IDataBase{
 
     @Override
     public Map<String,Integer> readHashMap(String mdHash) {
-        PreparedStatement pstmt =null;
         Connection conn=connect();
+
+        PreparedStatement pstmt =null;
         Map<String,Integer> freqmap=null;
+
         String sql = "SELECT freqmap from FrequencyMap WHERE mdhash = ?";
+
         if (conn != null) {
             ResultSet rs = null;
             try {
                 pstmt = conn.prepareStatement(sql);
                 pstmt.setString(1, mdHash);
                 rs=pstmt.executeQuery();
-                rs.next();
 
+                rs.next();
                 byte[] buf = rs.getBytes(1);
+
                 ObjectInputStream objectIn = null;
                 if (buf != null)
                     objectIn = new ObjectInputStream(new ByteArrayInputStream(buf));
@@ -203,17 +205,4 @@ public class SQLiteDB implements IDataBase{
         return conn;
     }
 
-
-
-//    public static void main(String[] args) {
-//        IDataBase setup = new SQLiteDB();
-//
-//        setup.createNewTable();
-////        setup.insert(conn, "Dhanish", 10);
-////        setup.insert(conn, "Anuroop", 11);
-////        setup.read(conn);
-//
-//        setup.update(2, "Anuuu", 12);
-//        setup.delete(3);
-//    }
 }

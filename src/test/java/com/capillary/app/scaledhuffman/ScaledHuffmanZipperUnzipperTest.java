@@ -56,6 +56,7 @@ public class ScaledHuffmanZipperUnzipperTest {
     public void testCompress_NormalCase() throws IOException {
         String originalFile = "input.txt";
         String compressedFile = "compress.txt";
+        doReturn(new byte[0]).when(fileReaderMock).readComp(any());
 
         zipper.compress(originalFile, compressedFile);
 
@@ -66,7 +67,7 @@ public class ScaledHuffmanZipperUnzipperTest {
         checkInOrder.verify(compTreeMock).getHashTable(any());
         checkInOrder.verify(compMock).getCompressedBytes(any(), any());
         checkInOrder.verify(compMock).byteFromByteList(any());
-        checkInOrder.verify(fileWriterMock).writeComp(any(), any(), any());
+        checkInOrder.verify(fileWriterMock).writeComp(any(), any(), any(), any());
     }
 
     @Test
@@ -84,7 +85,7 @@ public class ScaledHuffmanZipperUnzipperTest {
         String originalFile = "input.txt";
         String compressedFile = "compress.txt";
 
-        doReturn(new ComplexReturnType<>(null,null)).when(fileReaderMock).readDecomp(any());
+        doReturn(new ComplexReturnType<>(null,null, null)).when(fileReaderMock).readDecomp(any());
 
         zipper.decompress(originalFile, compressedFile);
 
@@ -100,7 +101,7 @@ public class ScaledHuffmanZipperUnzipperTest {
         String compressedFile = "compress.txt";
         String decompressFile = "decompress.txt";
 
-        doReturn(new ComplexReturnType<>(null,null)).when(fileReaderMock).readDecomp(any());
+        doReturn(new ComplexReturnType<>(null,null, null)).when(fileReaderMock).readDecomp(any());
         doThrow(IOException.class).when(fileWriterMock).writeDecomp(any(),anyBoolean(),any());
 
         assertThrows(RuntimeException.class,()->zipper.decompress(compressedFile, decompressFile));

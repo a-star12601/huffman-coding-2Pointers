@@ -1423,44 +1423,26 @@
     <argument id="503" parent="172">
       <Position>1</Position>
     </argument>
-    <table id="504" parent="173" name="FrequencyMap"/>
-    <table id="505" parent="173" name="sqlite_master">
+    <table id="504" parent="173" name="sqlite_master">
       <System>1</System>
     </table>
-    <column id="506" parent="504" name="id">
-      <DasType>integer|0s</DasType>
-      <Position>1</Position>
-    </column>
-    <column id="507" parent="504" name="name">
-      <DasType>text|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <column id="508" parent="504" name="capacity">
-      <DasType>real|0s</DasType>
-      <Position>3</Position>
-    </column>
-    <key id="509" parent="504">
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="510" parent="505" name="type">
+    <column id="505" parent="504" name="type">
       <DasType>TEXT|0s</DasType>
       <Position>1</Position>
     </column>
-    <column id="511" parent="505" name="name">
+    <column id="506" parent="504" name="name">
       <DasType>TEXT|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="512" parent="505" name="tbl_name">
+    <column id="507" parent="504" name="tbl_name">
       <DasType>TEXT|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="513" parent="505" name="rootpage">
+    <column id="508" parent="504" name="rootpage">
       <DasType>INT|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="514" parent="505" name="sql">
+    <column id="509" parent="504" name="sql">
       <DasType>TEXT|0s</DasType>
       <Position>5</Position>
     </column>

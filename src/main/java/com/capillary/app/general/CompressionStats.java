@@ -21,7 +21,7 @@ public class CompressionStats {
      * @param file2 the file 2
      * @return true if files match, else false
      */
-    private boolean compareFiles(String file1, String file2){
+    public boolean compareFiles(String file1, String file2){
         FileRead f=new FileRead();
         try {
             byte[] arr1 = f.readComp(file1);
